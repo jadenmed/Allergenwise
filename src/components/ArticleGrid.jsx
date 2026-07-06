@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import blog1 from "../assets/blog-1.jpg";
 import blog2 from "../assets/blog-2.jpg";
 import blog3 from "../assets/blog-3.jpg";
@@ -29,9 +30,10 @@ export default function ArticleGrid() {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
       {ARTICLES.map(
         ({ image, category, tone, title, description, readTime, date }, i) => (
-          <article
+          <Link
             key={i}
-            className="flex flex-col items-start rounded-2xl border border-grey-300 bg-white overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-[transform,box-shadow] duration-300 cursor-pointer"
+            to="/resources/do-restaurants-need-allergen-training"
+            className="flex flex-col items-start rounded-2xl border border-grey-300 bg-white overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-[transform,box-shadow] duration-300"
           >
             <div className="aspect-[160/90] w-full bg-teal-600 overflow-hidden">
               <img src={image} alt="" className="size-full object-cover" />
@@ -56,7 +58,7 @@ export default function ArticleGrid() {
                 <p className="text-base text-grey-500">{date}</p>
               </div>
             </div>
-          </article>
+          </Link>
         )
       )}
     </div>

@@ -6,6 +6,7 @@ import ForRestaurants from "./pages/ForRestaurants";
 import ForDiners from "./pages/ForDiners";
 import FindRestaurant from "./pages/FindRestaurant";
 import Resources from "./pages/Resources";
+import Article from "./pages/Article";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/for-diners" element={<ForDiners />} />
         <Route path="/find-restaurant" element={<FindRestaurant />} />
         <Route path="/resources" element={<Resources />} />
+        <Route path="/resources/:slug" element={<Article />} />
       </Routes>
       <Footer />
     </div>

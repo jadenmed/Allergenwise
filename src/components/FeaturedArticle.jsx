@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
 import featuredImage from "../assets/blog-1.jpg";
 
 export default function FeaturedArticle() {
   return (
-    <div className="w-full flex flex-col lg:flex-row items-stretch rounded-2xl border border-grey-300 bg-white overflow-hidden">
+    <Link
+      to="/resources/do-restaurants-need-allergen-training"
+      className="w-full flex flex-col lg:flex-row items-stretch rounded-2xl border border-grey-300 bg-white overflow-hidden hover:shadow-lg transition-shadow duration-300"
+    >
       <div className="w-full lg:w-1/2 aspect-[16/10] lg:aspect-auto bg-teal-600 overflow-hidden">
         <img src={featuredImage} alt="" className="size-full object-cover" />
       </div>
@@ -29,6 +33,6 @@ export default function FeaturedArticle() {
           <p className="text-base text-grey-500">May 29, 2026</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
