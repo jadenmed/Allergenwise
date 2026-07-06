@@ -9,7 +9,10 @@ export default function Hero() {
   return (
     <section className="w-full flex flex-col items-center min-h-[800px] bg-grey-100 px-12 pt-40 pb-12">
       <div className="w-full max-w-[1200px] flex items-center gap-12">
-        <div className="flex flex-col gap-14 items-start w-full max-w-[652px]">
+        <div
+          className="flex flex-col gap-14 items-start w-full max-w-[652px] anim-fade-left"
+          style={{ animationDelay: "100ms" }}
+        >
           <div className="flex flex-col gap-6 items-start w-full">
             <Badge>Accredited Allergen-safety Certification</Badge>
             <div className="flex flex-col gap-2 w-full">
@@ -36,7 +39,10 @@ export default function Hero() {
             <CheckItem>Renewed annually</CheckItem>
           </div>
         </div>
-        <div className="flex-1 min-w-0 h-[590px] relative">
+        <div
+          className="flex-1 min-w-0 h-[590px] relative anim-fade-right"
+          style={{ animationDelay: "250ms" }}
+        >
           <img
             src={heroPhones}
             alt="AllergenWise app showing a verified restaurant certification"

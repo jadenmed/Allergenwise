@@ -19,7 +19,7 @@ export default function Button({
 }) {
   return (
     <button
-      className={`inline-flex items-center justify-center font-semibold whitespace-nowrap transition-colors cursor-pointer ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
+      className={`inline-flex items-center justify-center font-semibold whitespace-nowrap transition-[colors,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:shadow-none cursor-pointer ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
       {...props}
     >
       {icon && <img src={icon} alt="" className="size-6" />}

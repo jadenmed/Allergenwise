@@ -6,7 +6,7 @@ export default function Logo({ dark = false, className = "" }) {
     <img
       src={dark ? logoWhite : logoTeal}
       alt="AllergenWise"
-      className={`h-8 w-auto ${className}`}
+      className={`h-8 w-[203px] ${className}`}
     />
   );
 }

@@ -3,6 +3,7 @@ import blog2 from "../assets/blog-2.jpg";
 import blog3 from "../assets/blog-3.jpg";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
+import { useInView } from "../hooks/useInView";
 
 const POSTS = [
   {
@@ -44,10 +45,16 @@ const BADGE_TONE_CLASSES = {
 };
 
 export default function Blogs() {
+  const [headingRef, headingInView] = useInView();
+  const [cardsRef, cardsInView] = useInView();
+
   return (
     <section className="w-full flex flex-col items-center justify-center bg-grey-100 px-12 py-24">
       <div className="w-full max-w-[1200px] flex flex-col items-center gap-10">
-        <div className="flex flex-col items-center gap-4 max-w-[520px] w-full text-center">
+        <div
+          ref={headingRef}
+          className={`flex flex-col items-center gap-4 max-w-[520px] w-full text-center ${headingInView ? "anim-fade-up" : "opacity-0"}`}
+        >
           <Badge>From the journal</Badge>
           <div className="flex flex-col gap-2 items-start w-full">
             <h2 className="font-serif font-semibold text-4xl leading-[48px] text-teal-950 w-full">
@@ -60,13 +67,14 @@ export default function Blogs() {
           </div>
         </div>
 
-        <div className="flex gap-8 items-start w-full">
+        <div ref={cardsRef} className="flex gap-8 items-start w-full">
           {POSTS.map(({ image, category, badgeTone, title, description, readTime, date }, i) => (
             <article
               key={i}
-              className="flex-1 min-w-0 flex flex-col items-start rounded-2xl border border-grey-300 bg-white overflow-hidden"
+              className={`flex-1 min-w-0 flex flex-col items-start rounded-2xl border border-grey-300 bg-white overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-[transform,box-shadow] duration-300 cursor-pointer ${cardsInView ? "anim-fade-up" : "opacity-0"}`}
+              style={{ animationDelay: `${i * 120}ms` }}
             >
-              <div className="aspect-[160/90] w-full bg-teal-600">
+              <div className="aspect-[160/90] w-full bg-teal-600 overflow-hidden">
                 <img
                   src={image}
                   alt=""

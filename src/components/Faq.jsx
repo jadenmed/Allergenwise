@@ -1,7 +1,7 @@
 import { useState } from "react";
-import iconX from "../assets/icon-x.svg";
 import iconPlus from "../assets/icon-plus.svg";
 import Badge from "./ui/Badge";
+import { useInView } from "../hooks/useInView";
 
 const FAQS = [
   {
@@ -33,24 +33,30 @@ const FAQS = [
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState(0);
+  const [headingRef, headingInView] = useInView();
+  const [itemsRef, itemsInView] = useInView();
 
   return (
     <section className="w-full flex flex-col items-center justify-center bg-grey-100 px-12 py-24">
       <div className="w-full max-w-[960px] flex flex-col items-center gap-10">
-        <div className="flex flex-col items-center gap-4 max-w-[520px] w-full text-center">
+        <div
+          ref={headingRef}
+          className={`flex flex-col items-center gap-4 max-w-[520px] w-full text-center ${headingInView ? "anim-fade-up" : "opacity-0"}`}
+        >
           <Badge>Frequently asked questions</Badge>
           <h2 className="font-serif font-semibold text-4xl leading-[48px] text-teal-950 w-full">
             Common Questions for AllergenWise, Answered
           </h2>
         </div>
 
-        <div className="flex flex-col gap-6 items-start w-full">
+        <div ref={itemsRef} className="flex flex-col gap-6 items-start w-full">
           {FAQS.map(({ question, answer }, index) => {
             const isOpen = index === openIndex;
             return (
               <div
                 key={question}
-                className="flex flex-col items-start w-full rounded-2xl border border-grey-300 bg-white overflow-hidden"
+                className={`flex flex-col items-start w-full rounded-2xl border border-grey-300 bg-white overflow-hidden transition-shadow duration-300 hover:shadow-md ${itemsInView ? "anim-fade-up" : "opacity-0"}`}
+                style={{ animationDelay: `${index * 80}ms` }}
               >
                 <button
                   type="button"
@@ -63,19 +69,23 @@ export default function Faq() {
                   </p>
                   <div className="flex items-center py-1 shrink-0">
                     <img
-                      src={isOpen ? iconX : iconPlus}
+                      src={iconPlus}
                       alt=""
-                      className="size-6"
+                      className={`size-6 transition-transform duration-300 ${isOpen ? "rotate-45" : "rotate-0"}`}
                     />
                   </div>
                 </button>
-                {isOpen && (
-                  <div className="flex flex-col items-start w-full px-8 pb-8">
-                    <p className="text-base leading-6 text-grey-800 w-full">
-                      {answer}
-                    </p>
+                <div
+                  className={`grid transition-[grid-template-rows] duration-300 ease-in-out w-full ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-8 pb-8">
+                      <p className="text-base leading-6 text-grey-800 w-full">
+                        {answer}
+                      </p>
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

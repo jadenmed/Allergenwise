@@ -1,4 +1,5 @@
 import Badge from "./ui/Badge";
+import { useInView } from "../hooks/useInView";
 
 const STEPS = [
   {
@@ -19,10 +20,16 @@ const STEPS = [
 ];
 
 export default function HowItWorks() {
+  const [headingRef, headingInView] = useInView();
+  const [cardsRef, cardsInView] = useInView();
+
   return (
     <section className="w-full flex flex-col items-center justify-center bg-grey-100 px-12 py-24">
       <div className="w-full max-w-[1200px] flex flex-col items-center gap-10">
-        <div className="flex flex-col items-center gap-4 max-w-[520px] text-center">
+        <div
+          ref={headingRef}
+          className={`flex flex-col items-center gap-4 max-w-[520px] text-center ${headingInView ? "anim-fade-up" : "opacity-0"}`}
+        >
           <Badge>How it works</Badge>
           <h2 className="font-serif font-semibold text-4xl leading-[48px] text-teal-950">
             Allergen Training, Certification, and Verification in{" "}
@@ -33,11 +40,12 @@ export default function HowItWorks() {
             instantly. the same record powers both.
           </p>
         </div>
-        <div className="flex gap-8 items-start w-full">
-          {STEPS.map(({ number, title, body }) => (
+        <div ref={cardsRef} className="flex gap-8 items-start w-full">
+          {STEPS.map(({ number, title, body }, i) => (
             <div
               key={number}
-              className="flex-1 min-w-0 h-[304px] flex flex-col gap-8 items-start rounded-2xl border border-grey-300 bg-white p-8"
+              className={`flex-1 min-w-0 h-[304px] flex flex-col gap-8 items-start rounded-2xl border border-grey-300 bg-white p-8 hover:-translate-y-1 hover:shadow-lg transition-[transform,box-shadow] duration-300 ${cardsInView ? "anim-fade-up" : "opacity-0"}`}
+              style={{ animationDelay: `${i * 120}ms` }}
             >
               <div className="flex flex-col items-center justify-center rounded-md size-10 bg-teal-050">
                 <p className="font-serif font-semibold text-xl leading-8 text-teal-950 text-center w-full">
