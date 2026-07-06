@@ -3,6 +3,7 @@ const TONES = {
   tealSolid: "bg-teal-700 text-white",
   tealDark: "bg-teal-100 text-teal-700",
   white: "bg-white text-teal-700",
+  red: "bg-red-100 text-red-700",
 };
 
 export default function Badge({ children, tone = "teal", className = "" }) {

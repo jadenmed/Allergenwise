@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import Button from "./ui/Button";
 import pattern from "../assets/pattern.png";
@@ -5,8 +6,17 @@ import instagram from "../assets/instagram.svg";
 import tiktok from "../assets/tiktok.svg";
 import linkedin from "../assets/linkedin.svg";
 
-const RESTAURANT_LINKS = ["Home", "For restaurants", "For diners", "Resources"];
-const COURSE_LINKS = ["Course", "Find restaurant", "Get certified"];
+const RESTAURANT_LINKS = [
+  { label: "Home", to: "/" },
+  { label: "For restaurants", to: "/for-restaurants" },
+  { label: "For diners", to: "/for-diners" },
+  { label: "Resources", to: "/resources" },
+];
+const COURSE_LINKS = [
+  { label: "Course", to: "#" },
+  { label: "Find restaurant", to: "/find-restaurant" },
+  { label: "Get certified", to: "#" },
+];
 const SOCIALS = [
   { icon: instagram, label: "Instagram" },
   { icon: tiktok, label: "TikTok" },
@@ -46,14 +56,14 @@ export default function Footer() {
           <div className="flex-1 min-w-[160px] flex flex-col gap-6 items-start">
             <p className="text-lg font-bold text-white">Restaurants</p>
             <nav className="flex flex-col gap-3 items-start py-1.5">
-              {RESTAURANT_LINKS.map((label) => (
-                <a
+              {RESTAURANT_LINKS.map(({ label, to }) => (
+                <Link
                   key={label}
-                  href="#"
+                  to={to}
                   className="pb-0.5 text-base text-grey-100 hover:text-teal-100"
                 >
                   {label}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
@@ -61,14 +71,14 @@ export default function Footer() {
           <div className="flex-1 min-w-[160px] flex flex-col gap-6 items-start">
             <p className="text-lg font-bold text-white">Course & Diners</p>
             <nav className="flex flex-col gap-3 items-start py-1.5">
-              {COURSE_LINKS.map((label) => (
-                <a
+              {COURSE_LINKS.map(({ label, to }) => (
+                <Link
                   key={label}
-                  href="#"
+                  to={to}
                   className="pb-0.5 text-base text-grey-100 hover:text-teal-100"
                 >
                   {label}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

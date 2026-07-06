@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { label: "Home", to: "/" },
   { label: "For restaurants", to: "/for-restaurants" },
   { label: "For diners", to: "/for-diners" },
-  { label: "Resources", to: "#" },
+  { label: "Resources", to: "/resources" },
 ];
 
 export default function Navbar() {
