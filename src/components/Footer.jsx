@@ -15,9 +15,9 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer className="relative w-full flex items-center justify-center overflow-hidden bg-teal-900 px-12 pt-24 pb-12">
-      <div className="relative z-10 w-full max-w-[1200px] flex flex-col gap-16 items-start">
-        <div className="flex gap-8 items-start w-full flex-wrap">
+    <footer className="relative w-full flex items-center justify-center overflow-hidden bg-teal-900 px-4 sm:px-6 lg:px-12 pt-16 lg:pt-24 pb-12">
+      <div className="relative z-10 w-full max-w-[1200px] flex flex-col gap-10 lg:gap-16 items-start">
+        <div className="flex flex-col sm:flex-row gap-8 items-start w-full flex-wrap">
           <div className="flex flex-col gap-10 items-start w-full max-w-[485px]">
             <div className="flex flex-col gap-6 items-start w-full">
               <Logo dark />

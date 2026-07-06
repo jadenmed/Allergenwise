@@ -1,11 +1,9 @@
 import heroPhones from "../assets/hero-phones.png";
-import sealCheck from "../assets/seal-check.svg";
-import magnifyingGlass from "../assets/magnifying-glass.svg";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
 import CheckItem from "./ui/CheckItem";
 
-export default function Hero() {
+export default function RestaurantHero() {
   return (
     <section className="w-full flex flex-col items-center bg-grey-100 px-4 sm:px-6 lg:px-12 pt-10 sm:pt-14 lg:pt-20 pb-12 lg:pb-20">
       <div className="w-full max-w-[1200px] flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-12">
@@ -14,29 +12,27 @@ export default function Hero() {
           style={{ animationDelay: "100ms" }}
         >
           <div className="flex flex-col gap-6 items-start w-full">
-            <Badge>Accredited Allergen-safety Certification</Badge>
+            <Badge>For Restaurant Owners &amp; Operators</Badge>
             <div className="flex flex-col gap-2 w-full">
               <h1 className="font-serif font-semibold text-3xl sm:text-4xl lg:text-[48px] leading-tight lg:leading-[52px] text-teal-950">
-                Allergen Safety Certification for Restaurants,{" "}
-                <span className="text-teal-700">Verified in Two Seconds</span>
+                Make Allergen Safety a Credential — Not a Claim
               </h1>
               <p className="text-base sm:text-lg leading-7 text-grey-900">
-                Accredited allergen safety training and certification for restaurant
-                staff, paired with a tamper-evident QR window seal diners can scan to
-                verify your certification is real and current.
+                Certify every server, line cook, and manager to an accredited
+                standard. Get a tamper-evident QR seal diners can verify
+                before they sit down and a public listing that turns allergen
+                safety into a competitive advantage.
               </p>
             </div>
             <div className="flex flex-wrap gap-4 items-center w-full">
-              <Button icon={sealCheck}>Certify your restaurant</Button>
-              <Button icon={magnifyingGlass} variant="outline">
-                Find &amp; verify a restaurant
-              </Button>
+              <Button>View the course</Button>
+              <Button variant="outline">See the owner dashboard</Button>
             </div>
           </div>
           <div className="flex flex-wrap gap-4 items-center w-full">
-            <CheckItem>Independently accredited</CheckItem>
-            <CheckItem>Tamper-proof verification</CheckItem>
-            <CheckItem>Renewed annually</CheckItem>
+            <CheckItem>ID-verified individual credentials</CheckItem>
+            <CheckItem>Proctored exam</CheckItem>
+            <CheckItem>Renewal reminders 30 days out</CheckItem>
           </div>
         </div>
         <div
@@ -45,7 +41,7 @@ export default function Hero() {
         >
           <img
             src={heroPhones}
-            alt="AllergenWise app showing a verified restaurant certification"
+            alt="AllergenWise owner dashboard and staff certificate on mobile"
             className="absolute inset-0 size-full object-cover pointer-events-none"
           />
         </div>

@@ -4,17 +4,17 @@ import CheckItem from "./ui/CheckItem";
 
 export default function Audiences() {
   return (
-    <section className="w-full flex flex-col items-center justify-center bg-gradient-to-b from-grey-100 to-white px-12 py-24">
+    <section className="w-full flex flex-col items-center justify-center bg-gradient-to-b from-grey-100 to-white px-4 sm:px-6 lg:px-12 py-16 lg:py-24">
       <div className="w-full max-w-[1200px] flex flex-col items-center gap-10">
         <div className="flex flex-col items-center gap-4 max-w-[520px] w-full text-center">
           <Badge>Two audiences, one system</Badge>
-          <h2 className="font-serif font-semibold text-4xl leading-[48px] text-teal-950 w-full">
+          <h2 className="font-serif font-semibold text-3xl sm:text-4xl leading-tight sm:leading-[48px] text-teal-950 w-full">
             Whether You Serve Food or Order it
           </h2>
         </div>
 
-        <div className="flex gap-8 items-start w-full">
-          <div className="flex-1 min-w-0 h-[488px] flex flex-col gap-8 items-start rounded-2xl border border-grey-300 bg-gradient-to-b from-teal-050 to-white p-8">
+        <div className="flex flex-col lg:flex-row gap-8 items-stretch w-full">
+          <div className="flex-1 min-w-0 flex flex-col gap-8 items-start rounded-2xl border border-grey-300 bg-gradient-to-b from-teal-050 to-white p-8">
             <Badge tone="white">For restaurants</Badge>
             <div className="flex flex-col gap-5 items-start w-full">
               <h3 className="font-serif font-semibold text-2xl leading-8 text-teal-950 w-full">
@@ -35,7 +35,7 @@ export default function Audiences() {
             <Button size="sm">Get certified</Button>
           </div>
 
-          <div className="flex-1 min-w-0 h-[488px] flex flex-col gap-8 items-start rounded-2xl border border-grey-300 bg-white p-8">
+          <div className="flex-1 min-w-0 flex flex-col gap-8 items-start rounded-2xl border border-grey-300 bg-white p-8">
             <Badge>For diners</Badge>
             <div className="flex flex-col gap-5 items-start w-full">
               <h3 className="font-serif font-semibold text-2xl leading-8 text-teal-950 w-full">

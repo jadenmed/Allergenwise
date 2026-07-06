@@ -4,22 +4,22 @@ import { useInView } from "../hooks/useInView";
 const STEPS = [
   {
     number: "1",
-    title: "Train & Certify Your Staff",
-    body: "Your team completes accredited allergen-safety training covering the major allergens, cross-contact, sanitation, and emergency response, then passes a certification exam.",
+    title: "Look for the Seal",
+    body: "Certified restaurants display a tamper-evident window decal with a unique QR code at the entrance.",
   },
   {
     number: "2",
-    title: "Earn the Window Seal",
-    body: "Certified restaurants receive a tamper-evident window decal with a unique QR code linked to a live certification record.",
+    title: "Scan with Your Camera",
+    body: "Open your phone's regular camera — no app needed — and point at the QR code. Tap the link that appears.",
   },
   {
     number: "3",
-    title: "Diners Verify in Seconds",
-    body: "A quick scan shows whether the certification is real, who's certified, and exactly when it was last renewed; no app or account needed.",
+    title: "Read the Green Seal",
+    body: "If you see green, the certification is current. Amber means it's expiring. Red means it's lapsed — ask staff directly.",
   },
 ];
 
-export default function HowItWorks() {
+export default function VerifySteps() {
   const [headingRef, headingInView] = useInView();
   const [cardsRef, cardsInView] = useInView();
 
@@ -30,15 +30,10 @@ export default function HowItWorks() {
           ref={headingRef}
           className={`flex flex-col items-center gap-4 max-w-[520px] text-center ${headingInView ? "anim-fade-up" : "opacity-0"}`}
         >
-          <Badge>How it works</Badge>
+          <Badge>How verification works</Badge>
           <h2 className="font-serif font-semibold text-3xl sm:text-4xl leading-tight sm:leading-[48px] text-teal-950">
-            Allergen Training, Certification, and Verification in{" "}
-            <span className="text-teal-700">One System</span>
+            Two Seconds, No Account, No App
           </h2>
-          <p className="text-base leading-6 text-grey-900">
-            Restaurants train and certify their team. Diners verify the result
-            instantly. the same record powers both.
-          </p>
         </div>
         <div ref={cardsRef} className="flex flex-col sm:flex-row gap-8 items-stretch w-full">
           {STEPS.map(({ number, title, body }, i) => (

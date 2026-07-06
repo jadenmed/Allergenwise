@@ -19,22 +19,22 @@ const POINTS = [
 
 export default function Benefits() {
   return (
-    <section className="relative w-full flex flex-col items-center justify-center overflow-hidden bg-teal-800 px-12 py-24">
+    <section className="relative w-full flex flex-col items-center justify-center overflow-hidden bg-teal-800 px-4 sm:px-6 lg:px-12 py-16 lg:py-24">
       <img
         src={pattern}
         alt=""
         className="absolute z-0 top-1/2 -translate-y-1/2 right-[calc(50%-600px)] w-[800px] max-w-none opacity-32 object-cover pointer-events-none"
       />
-      <div className="relative z-10 w-full max-w-[1200px] flex gap-10 items-start justify-center">
+      <div className="relative z-10 w-full max-w-[1200px] flex flex-col lg:flex-row gap-10 items-center lg:items-start justify-center">
         <div className="flex-1 min-w-0 flex flex-col gap-6 items-start">
           <div className="inline-flex items-center justify-center rounded px-3.5 py-2 text-xs font-bold uppercase text-white bg-teal-700">
             The Moment That Matters
           </div>
           <div className="flex flex-col gap-2 items-start w-full">
-            <h2 className="font-serif font-semibold text-[48px] leading-[52px] text-white w-full">
+            <h2 className="font-serif font-semibold text-3xl sm:text-4xl lg:text-[48px] leading-tight lg:leading-[52px] text-white w-full">
               A Parent at the Door, Two Seconds to Decide
             </h2>
-            <p className="text-lg leading-7 text-teal-050 w-full">
+            <p className="text-base sm:text-lg leading-7 text-teal-050 w-full">
               Before the cake comes out, a parent scans the seal on the window.
               AllergenWise is engineered so the answer they need lands instantly —
               no logins, no PDFs, no guessing.
@@ -54,7 +54,7 @@ export default function Benefits() {
             ))}
           </div>
         </div>
-        <div className="shrink-0 size-[550px]">
+        <div className="shrink-0 w-full max-w-[420px] lg:max-w-none lg:size-[550px] aspect-square">
           <img
             src={benefitsPhones}
             alt="AllergenWise app showing an instant certification verification"

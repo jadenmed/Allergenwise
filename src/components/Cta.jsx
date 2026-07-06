@@ -5,12 +5,12 @@ import Button from "./ui/Button";
 
 export default function Cta() {
   return (
-    <section className="w-full flex flex-col items-center justify-center bg-gradient-to-b from-teal-050 to-grey-100 px-12 py-24">
+    <section className="w-full flex flex-col items-center justify-center bg-gradient-to-b from-teal-050 to-grey-100 px-4 sm:px-6 lg:px-12 py-16 lg:py-24">
       <div className="w-full max-w-[1200px] flex flex-col items-center gap-10">
         <div className="flex flex-col items-center gap-6 max-w-[520px] w-full text-center">
           <Badge tone="tealDark">Get started</Badge>
           <div className="flex flex-col gap-2 items-start w-full">
-            <h2 className="font-serif font-semibold text-4xl leading-[48px] text-teal-950 w-full">
+            <h2 className="font-serif font-semibold text-3xl sm:text-4xl leading-tight sm:leading-[48px] text-teal-950 w-full">
               Trust isn't Claimed, It's Verified
             </h2>
             <p className="text-base leading-6 text-grey-900 w-full">

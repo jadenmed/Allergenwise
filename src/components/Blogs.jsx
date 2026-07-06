@@ -49,7 +49,7 @@ export default function Blogs() {
   const [cardsRef, cardsInView] = useInView();
 
   return (
-    <section className="w-full flex flex-col items-center justify-center bg-grey-100 px-12 py-24">
+    <section className="w-full flex flex-col items-center justify-center bg-grey-100 px-4 sm:px-6 lg:px-12 py-16 lg:py-24">
       <div className="w-full max-w-[1200px] flex flex-col items-center gap-10">
         <div
           ref={headingRef}
@@ -57,7 +57,7 @@ export default function Blogs() {
         >
           <Badge>From the journal</Badge>
           <div className="flex flex-col gap-2 items-start w-full">
-            <h2 className="font-serif font-semibold text-4xl leading-[48px] text-teal-950 w-full">
+            <h2 className="font-serif font-semibold text-3xl sm:text-4xl leading-tight sm:leading-[48px] text-teal-950 w-full">
               Stay Current on Allergen Safety
             </h2>
             <p className="text-base leading-6 text-grey-900 w-full">
@@ -67,7 +67,7 @@ export default function Blogs() {
           </div>
         </div>
 
-        <div ref={cardsRef} className="flex gap-8 items-start w-full">
+        <div ref={cardsRef} className="flex flex-col sm:flex-row gap-8 items-stretch w-full">
           {POSTS.map(({ image, category, badgeTone, title, description, readTime, date }, i) => (
             <article
               key={i}

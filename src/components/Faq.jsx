@@ -37,14 +37,14 @@ export default function Faq() {
   const [itemsRef, itemsInView] = useInView();
 
   return (
-    <section className="w-full flex flex-col items-center justify-center bg-grey-100 px-12 py-24">
+    <section className="w-full flex flex-col items-center justify-center bg-grey-100 px-4 sm:px-6 lg:px-12 py-16 lg:py-24">
       <div className="w-full max-w-[960px] flex flex-col items-center gap-10">
         <div
           ref={headingRef}
           className={`flex flex-col items-center gap-4 max-w-[520px] w-full text-center ${headingInView ? "anim-fade-up" : "opacity-0"}`}
         >
           <Badge>Frequently asked questions</Badge>
-          <h2 className="font-serif font-semibold text-4xl leading-[48px] text-teal-950 w-full">
+          <h2 className="font-serif font-semibold text-3xl sm:text-4xl leading-tight sm:leading-[48px] text-teal-950 w-full">
             Common Questions for AllergenWise, Answered
           </h2>
         </div>
@@ -62,9 +62,9 @@ export default function Faq() {
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? -1 : index)}
                   aria-expanded={isOpen}
-                  className="flex gap-5 items-start w-full p-8 cursor-pointer text-left"
+                  className="flex gap-5 items-start w-full p-5 sm:p-8 cursor-pointer text-left"
                 >
-                  <p className="flex-1 min-w-0 font-serif font-semibold text-2xl leading-8 text-teal-950">
+                  <p className="flex-1 min-w-0 font-serif font-semibold text-xl sm:text-2xl leading-8 text-teal-950">
                     {question}
                   </p>
                   <div className="flex items-center py-1 shrink-0">
@@ -79,7 +79,7 @@ export default function Faq() {
                   className={`grid transition-[grid-template-rows] duration-300 ease-in-out w-full ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-8 pb-8">
+                    <div className="px-5 sm:px-8 pb-5 sm:pb-8">
                       <p className="text-base leading-6 text-grey-800 w-full">
                         {answer}
                       </p>
