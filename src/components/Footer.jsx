@@ -13,7 +13,7 @@ const RESTAURANT_LINKS = [
   { label: "Resources", to: "/resources" },
 ];
 const COURSE_LINKS = [
-  { label: "Course", to: "#" },
+  { label: "Course", to: "/course" },
   { label: "Find restaurant", to: "/find-restaurant" },
   { label: "Get certified", to: "#" },
 ];
