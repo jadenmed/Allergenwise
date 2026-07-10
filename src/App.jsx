@@ -9,17 +9,20 @@ import FindRestaurant from "./pages/FindRestaurant";
 import Resources from "./pages/Resources";
 import Course from "./pages/Course";
 import CourseLesson from "./pages/CourseLesson";
+import ExamPreview from "./pages/ExamPreview";
 import Article from "./pages/Article";
 import VerifyCertificate from "./pages/VerifyCertificate";
 
 export default function App() {
   const { pathname } = useLocation();
   const isCourseLesson = pathname.startsWith("/course/lesson");
+  const isExamPreview = pathname === "/course/exam/preview";
+  const hideChrome = isCourseLesson || isExamPreview;
 
   return (
     <div className="flex flex-col items-center w-full">
       <ScrollToTop />
-      {!isCourseLesson && <Navbar />}
+      {!hideChrome && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/for-restaurants" element={<ForRestaurants />} />
@@ -28,10 +31,11 @@ export default function App() {
         <Route path="/resources" element={<Resources />} />
         <Route path="/course" element={<Course />} />
         <Route path="/course/lesson/:moduleId/:lessonId" element={<CourseLesson />} />
+        <Route path="/course/exam/preview" element={<ExamPreview />} />
         <Route path="/resources/:slug" element={<Article />} />
         <Route path="/verify/:credentialId" element={<VerifyCertificate />} />
       </Routes>
-      {!isCourseLesson && <Footer />}
+      {!hideChrome && <Footer />}
     </div>
   );
 }

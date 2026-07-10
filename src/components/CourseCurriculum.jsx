@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
 import CheckItem from "./ui/CheckItem";
@@ -172,7 +173,9 @@ export default function CourseCurriculum() {
                   </div>
                 ))}
               </div>
-              <Button variant="outline">Preview exam</Button>
+              <Link to="/course/exam/preview">
+                <Button variant="outline">Preview exam</Button>
+              </Link>
             </div>
           </div>
 
