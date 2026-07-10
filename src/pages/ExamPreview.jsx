@@ -98,7 +98,9 @@ export default function ExamPreview() {
               Back to course
             </Button>
           </Link>
-          <Button size="sm">Start real exam</Button>
+          <Link to="/course/exam">
+            <Button size="sm">Start real exam</Button>
+          </Link>
         </div>
       </header>
 
@@ -183,7 +185,9 @@ export default function ExamPreview() {
             </div>
 
             <div className="flex justify-center">
-              <Button size="lg">Start the real exam</Button>
+              <Link to="/course/exam">
+                <Button size="lg">Start the real exam</Button>
+              </Link>
             </div>
           </div>
         </div>

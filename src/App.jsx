@@ -10,19 +10,25 @@ import Resources from "./pages/Resources";
 import Course from "./pages/Course";
 import CourseLesson from "./pages/CourseLesson";
 import ExamPreview from "./pages/ExamPreview";
+import ExamSession from "./pages/ExamSession";
+import ExamResults from "./pages/ExamResults";
+import ExamResultsPending from "./pages/ExamResultsPending";
+import ExamResultsFailed from "./pages/ExamResultsFailed";
 import Article from "./pages/Article";
 import VerifyCertificate from "./pages/VerifyCertificate";
 
 export default function App() {
   const { pathname } = useLocation();
   const isCourseLesson = pathname.startsWith("/course/lesson");
-  const isExamPreview = pathname === "/course/exam/preview";
-  const hideChrome = isCourseLesson || isExamPreview;
+  const isExam = pathname.startsWith("/course/exam");
+  const isExamResults = pathname.startsWith("/course/exam/results");
+  const hideNavbar = isCourseLesson || isExam;
+  const hideFooter = isCourseLesson || (isExam && !isExamResults);
 
   return (
     <div className="flex flex-col items-center w-full">
       <ScrollToTop />
-      {!hideChrome && <Navbar />}
+      {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/for-restaurants" element={<ForRestaurants />} />
@@ -32,10 +38,20 @@ export default function App() {
         <Route path="/course" element={<Course />} />
         <Route path="/course/lesson/:moduleId/:lessonId" element={<CourseLesson />} />
         <Route path="/course/exam/preview" element={<ExamPreview />} />
+        <Route path="/course/exam/results" element={<ExamResults />} />
+        <Route
+          path="/course/exam/results/pending"
+          element={<ExamResultsPending />}
+        />
+        <Route
+          path="/course/exam/results/failed"
+          element={<ExamResultsFailed />}
+        />
+        <Route path="/course/exam" element={<ExamSession />} />
         <Route path="/resources/:slug" element={<Article />} />
         <Route path="/verify/:credentialId" element={<VerifyCertificate />} />
       </Routes>
-      {!hideChrome && <Footer />}
+      {!hideFooter && <Footer />}
     </div>
   );
 }
