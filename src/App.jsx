@@ -14,6 +14,7 @@ import ExamSession from "./pages/ExamSession";
 import ExamResults from "./pages/ExamResults";
 import ExamResultsPending from "./pages/ExamResultsPending";
 import ExamResultsFailed from "./pages/ExamResultsFailed";
+import Dashboard from "./pages/Dashboard";
 import Article from "./pages/Article";
 import VerifyCertificate from "./pages/VerifyCertificate";
 
@@ -22,8 +23,9 @@ export default function App() {
   const isCourseLesson = pathname.startsWith("/course/lesson");
   const isExam = pathname.startsWith("/course/exam");
   const isExamResults = pathname.startsWith("/course/exam/results");
-  const hideNavbar = isCourseLesson || isExam;
-  const hideFooter = isCourseLesson || (isExam && !isExamResults);
+  const isDashboard = pathname.startsWith("/dashboard");
+  const hideNavbar = isCourseLesson || isExam || isDashboard;
+  const hideFooter = isCourseLesson || isDashboard || (isExam && !isExamResults);
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -48,6 +50,7 @@ export default function App() {
           element={<ExamResultsFailed />}
         />
         <Route path="/course/exam" element={<ExamSession />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/resources/:slug" element={<Article />} />
         <Route path="/verify/:credentialId" element={<VerifyCertificate />} />
       </Routes>

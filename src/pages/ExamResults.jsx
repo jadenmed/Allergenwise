@@ -85,7 +85,9 @@ export default function ExamResults() {
               Back to course
             </Button>
           </Link>
-          <Button size="sm">Open dashboard</Button>
+          <Link to="/dashboard">
+            <Button size="sm">Open dashboard</Button>
+          </Link>
         </div>
       </header>
 
