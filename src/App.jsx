@@ -32,6 +32,15 @@ import SubmissionDetail from "./pages/SubmissionDetail";
 import CertificationQueue from "./pages/CertificationQueue";
 import Brands from "./pages/Brands";
 import Partners from "./pages/Partners";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import CheckEmail from "./pages/CheckEmail";
+import InviteAccept from "./pages/InviteAccept";
+import VerifyIdentity from "./pages/VerifyIdentity";
+import NotFound from "./pages/NotFound";
+import Forbidden from "./pages/Forbidden";
+import PublicDirectory from "./pages/PublicDirectory";
+import VerifyComingSoon from "./pages/VerifyComingSoon";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -41,8 +50,14 @@ export default function App() {
   const isDashboard = pathname.startsWith("/dashboard");
   const isPortal = pathname.startsWith("/portal");
   const isInternal = pathname.startsWith("/internal");
-  const hideNavbar = isCourseLesson || isExam || isDashboard || isPortal || isInternal;
-  const hideFooter = isCourseLesson || isDashboard || isPortal || isInternal || (isExam && !isExamResults);
+  const isAuth =
+    pathname.startsWith("/sign-in") ||
+    pathname.startsWith("/sign-up") ||
+    pathname.startsWith("/invite") ||
+    pathname.startsWith("/verify-identity");
+  const isForbidden = pathname === "/403";
+  const hideNavbar = isCourseLesson || isExam || isDashboard || isPortal || isInternal || isAuth || isForbidden;
+  const hideFooter = isCourseLesson || isDashboard || isPortal || isInternal || isAuth || (isExam && !isExamResults);
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -83,8 +98,17 @@ export default function App() {
         <Route path="/internal/certifications" element={<CertificationQueue />} />
         <Route path="/internal/brands" element={<Brands />} />
         <Route path="/internal/partners" element={<Partners />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-up/check-email" element={<CheckEmail />} />
+        <Route path="/invite" element={<InviteAccept />} />
+        <Route path="/verify-identity" element={<VerifyIdentity />} />
         <Route path="/resources/:slug" element={<Article />} />
         <Route path="/verify/:credentialId" element={<VerifyCertificate />} />
+        <Route path="/verify" element={<VerifyComingSoon />} />
+        <Route path="/directory" element={<PublicDirectory />} />
+        <Route path="/403" element={<Forbidden />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {!hideFooter && <Footer />}
     </div>
