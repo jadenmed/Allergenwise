@@ -1,20 +1,39 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../components/Logo";
+import { LogoMark } from "../components/Logo";
 import Badge from "../components/ui/Badge";
 import Button from "../components/ui/Button";
+import DashboardShell, { RESTAURANT, OWNER } from "../components/dashboard/DashboardShell";
+import InviteStaffModal from "../components/dashboard/InviteStaffModal";
 import iconPlus from "../assets/icon-plus.svg";
 
-const RESTAURANT = {
-  name: "The Garden Table",
-  staffCertifiedCount: 9,
-  staffTotalCount: 9,
-  credentialId: "AW-PDX-8FQ2-K9",
-  issued: "Mar 4, 2026",
-  validThrough: "Mar 4, 2027",
-  diner30dViews: "1.4k",
+const SUBMISSION_STATUS_CONFIG = {
+  notSubmitted: {
+    badge: null,
+    body: "Your account is set up. To start certifying staff, submit your restaurant for review. Most submissions get a decision within 3 business days.",
+    cta: { label: "Submit your restaurant", variant: "primary", arrow: false, to: "/dashboard/submit" },
+  },
+  waitingForReview: {
+    badge: { label: "Waiting for review", tone: "yellow" },
+    body: "You have submitted your restaurant for review. To check the status of your restaurant submission, click the button below.",
+    cta: { label: "View submission status", variant: "outline", arrow: true, to: "/dashboard/status" },
+  },
+  inReview: {
+    badge: { label: "In review", tone: "teal" },
+    body: "You have submitted your restaurant for review. To check the status of your restaurant submission, click the button below.",
+    cta: { label: "View submission status", variant: "outline", arrow: true, to: "/dashboard/status" },
+  },
+  infoRequested: {
+    badge: { label: "Info requested", tone: "green" },
+    body: "It seems we need a bit more from you. We have reviewed your submission and there are things that still needs to be required. Please view and add the requirements to continue.",
+    cta: { label: "View requirements", variant: "primary", arrow: true, to: "/dashboard/status" },
+  },
+  declined: {
+    badge: { label: "Declined", tone: "red" },
+    body: "You have submitted your restaurant for review. But, it seems we have found some issues and could not proceed with your submission.",
+    cta: { label: "Learn why", variant: "primary", arrow: true, to: "/dashboard/status" },
+  },
 };
-
-const OWNER = { name: "Maria Reyes", initials: "MR", role: "Owner" };
 
 const STATS = [
   { label: "Staff certified", value: "9 / 9", caption: "All current" },
@@ -89,56 +108,6 @@ const STAFF = [
   },
 ];
 
-const NAV_ITEMS = [
-  { key: "overview", label: "Overview", icon: "grid" },
-  { key: "staff", label: "Staff", icon: "people" },
-  { key: "billing", label: "Billing", icon: "card" },
-];
-
-function GridIcon({ className = "" }) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <rect x="3" y="3" width="6" height="6" rx="1" />
-      <rect x="11" y="3" width="6" height="6" rx="1" />
-      <rect x="3" y="11" width="6" height="6" rx="1" />
-      <rect x="11" y="11" width="6" height="6" rx="1" />
-    </svg>
-  );
-}
-
-function PeopleIcon({ className = "" }) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <circle cx="7" cy="7" r="2.5" />
-      <path d="M2.5 16c.5-3 2.2-4.5 4.5-4.5s4 1.5 4.5 4.5" />
-      <circle cx="14" cy="7.5" r="2" />
-      <path d="M12.5 11.5c1.8.3 3 1.6 3.5 4" />
-    </svg>
-  );
-}
-
-function CardIcon({ className = "" }) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <rect x="2.5" y="4.5" width="15" height="11" rx="1.5" />
-      <path d="M2.5 8h15" />
-      <path d="M5 12h4" />
-    </svg>
-  );
-}
-
-function SignOutIcon({ className = "" }) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M7 17.5H4a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1h3" />
-      <path d="M13 14l4-4-4-4" />
-      <path d="M17 10H7" />
-    </svg>
-  );
-}
-
-const NAV_ICONS = { grid: GridIcon, people: PeopleIcon, card: CardIcon };
-
 function DownloadIcon({ className = "" }) {
   return (
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -192,91 +161,55 @@ const STATUS_STYLES = {
   renew: "text-yellow-700",
 };
 
-export default function Dashboard() {
+function SubmissionStatusPanel({ status, ownerFirstName }) {
+  const config = SUBMISSION_STATUS_CONFIG[status];
+
   return (
-    <div className="w-full min-h-screen flex flex-col bg-grey-100">
-      <header className="w-full flex items-center justify-between gap-4 border-b border-grey-300 bg-white px-4 sm:px-6 py-4">
-        <div className="flex items-center gap-4 min-w-0">
-          <Logo className="shrink-0" />
-          <div className="hidden sm:block h-6 w-px bg-grey-300 shrink-0" />
-          <p className="hidden sm:block text-base text-grey-600 truncate">
-            Owner Dashboard
-          </p>
+    <div className="flex-1 flex items-center justify-center">
+      <div className="w-full max-w-[640px] flex flex-col items-center gap-6 rounded-2xl border border-grey-300 bg-white px-8 py-16 text-center">
+        <div className="flex items-center justify-center size-16 rounded-2xl border-2 border-teal-700 text-teal-700">
+          <LogoMark className="size-9" />
         </div>
-        <div className="flex items-center gap-2.5 shrink-0">
-          <div className="flex items-center justify-center size-9 rounded-full bg-teal-100 text-xs font-bold text-teal-700">
-            {OWNER.initials}
-          </div>
-          <p className="text-base text-teal-950">{OWNER.name}</p>
+
+        {config.badge && <Badge tone={config.badge.tone}>{config.badge.label}</Badge>}
+
+        <div className="flex flex-col gap-3">
+          <h1 className="font-serif font-semibold text-3xl text-teal-950">
+            Welcome to AllergenWise, {ownerFirstName}
+          </h1>
+          <p className="max-w-[440px] text-base text-grey-600">{config.body}</p>
         </div>
-      </header>
 
-      <div className="w-full flex flex-1">
-        <aside className="hidden lg:flex w-[280px] shrink-0 flex-col justify-between border-r border-grey-300 bg-white px-4 py-6">
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-2 rounded-xl bg-teal-050 p-4">
-              <p className="text-xs font-bold uppercase tracking-wide text-grey-500">
-                Restaurant
-              </p>
-              <p className="text-lg font-semibold text-teal-950">
-                {RESTAURANT.name}
-              </p>
-              <p className="flex items-center gap-1.5 text-sm font-semibold text-green-700">
-                <span className="size-1.5 rounded-full bg-green-700" />
-                Active &middot; {RESTAURANT.staffCertifiedCount}/
-                {RESTAURANT.staffTotalCount} certified
-              </p>
-            </div>
+        {config.cta.to ? (
+          <Link to={config.cta.to}>
+            <Button variant={config.cta.variant} size="sm">
+              {config.cta.label}
+              {config.cta.arrow ? " \u2192" : ""}
+            </Button>
+          </Link>
+        ) : (
+          <Button variant={config.cta.variant} size="sm">
+            {config.cta.label}
+            {config.cta.arrow ? " \u2192" : ""}
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+}
 
-            <nav className="flex flex-col gap-1">
-              {NAV_ITEMS.map((item) => {
-                const Icon = NAV_ICONS[item.icon];
-                const isActive = item.key === "overview";
-                return (
-                  <button
-                    key={item.key}
-                    type="button"
-                    className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-base font-semibold text-left cursor-pointer ${
-                      isActive
-                        ? "bg-teal-700 text-white"
-                        : "text-teal-950 hover:bg-grey-100"
-                    }`}
-                  >
-                    <Icon className="size-5 shrink-0" />
-                    {item.label}
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
+export default function Dashboard() {
+  const [inviteOpen, setInviteOpen] = useState(false);
 
-          <div className="flex flex-col gap-4">
-            <div className="border-t border-grey-300 pt-4">
-              <button
-                type="button"
-                className="flex items-center gap-2 text-base font-semibold text-red-600 cursor-pointer"
-              >
-                <SignOutIcon className="size-5" />
-                Sign out
-              </button>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center size-9 rounded-full bg-teal-100 text-xs font-bold text-teal-700 shrink-0">
-                {OWNER.initials}
-              </div>
-              <div className="flex flex-col">
-                <p className="text-sm font-semibold text-teal-950">
-                  {OWNER.name}
-                </p>
-                <p className="text-xs text-grey-500">
-                  {OWNER.role} &middot; {RESTAURANT.name}
-                </p>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        <main className="flex-1 flex flex-col gap-6 px-4 sm:px-6 lg:px-10 py-8 min-w-0">
+  return (
+    <DashboardShell activeNav="overview">
+      {RESTAURANT.status !== "active" ? (
+        <SubmissionStatusPanel
+          status={RESTAURANT.status}
+          ownerFirstName={OWNER.name.split(" ")[0]}
+        />
+      ) : (
+        <>
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="flex flex-col gap-1">
               <h1 className="font-serif font-semibold text-3xl text-teal-950">
@@ -287,7 +220,12 @@ export default function Dashboard() {
                 in 24 days.
               </p>
             </div>
-            <Button variant="outline" size="sm" icon={iconPlus}>
+            <Button
+              variant="outline"
+              size="sm"
+              icon={iconPlus}
+              onClick={() => setInviteOpen(true)}
+            >
               Invite staff
             </Button>
           </div>
@@ -353,11 +291,19 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <Link to={`/verify/${RESTAURANT.credentialId}`} className="self-start">
-                <Button variant="outline" size="sm">
-                  View public verification page
-                </Button>
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link to={`/verify/${RESTAURANT.credentialId}`} className="self-start">
+                  <Button variant="outline" size="sm">
+                    View public verification page
+                  </Button>
+                </Link>
+                <Link
+                  to="/dashboard/record"
+                  className="text-sm font-semibold text-teal-700 hover:text-teal-800"
+                >
+                  View full certification record
+                </Link>
+              </div>
             </div>
 
             <div className="rounded-2xl bg-teal-900 p-6 flex flex-col items-center gap-4 text-center">
@@ -486,8 +432,14 @@ export default function Dashboard() {
               + 4 more certified staff
             </p>
           </div>
-        </main>
-      </div>
-    </div>
+        </>
+      )}
+
+      <InviteStaffModal
+        open={inviteOpen}
+        onClose={() => setInviteOpen(false)}
+        restaurantName={RESTAURANT.name}
+      />
+    </DashboardShell>
   );
 }

@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { label: "For restaurants", to: "/for-restaurants" },
   { label: "For diners", to: "/for-diners" },
   { label: "Resources", to: "/resources" },
+  { label: "Pricing", to: "/pricing" },
 ];
 
 export default function Navbar() {
