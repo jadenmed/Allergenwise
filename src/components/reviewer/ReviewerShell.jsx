@@ -9,8 +9,8 @@ const NAV_ITEMS = [
   { key: "overview", label: "Overview", icon: "grid", to: "/internal" },
   { key: "submissions", label: "Submissions", icon: "doc", to: "/internal/submissions", count: 14 },
   { key: "certifications", label: "Certifications", icon: "shield", to: "/internal/certifications", count: 10 },
-  { key: "brands", label: "Brands", icon: "building" },
-  { key: "partners", label: "Partners", icon: "handshake" },
+  { key: "brands", label: "Brands", icon: "building", to: "/internal/brands" },
+  { key: "partners", label: "Partners", icon: "handshake", to: "/internal/partners" },
 ];
 
 function GridIcon({ className = "" }) {
@@ -96,7 +96,9 @@ export default function ReviewerShell({ activeNav = "overview", children }) {
           <div className="flex items-center justify-center size-9 rounded-full bg-teal-100 text-xs font-bold text-teal-700">
             {REVIEWER.initials}
           </div>
-          <p className="text-base text-teal-950">{REVIEWER.name}</p>
+          <p className="text-base text-teal-950">
+            {REVIEWER.name.split(" ")[0]}
+          </p>
         </div>
       </header>
 

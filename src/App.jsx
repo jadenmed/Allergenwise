@@ -30,6 +30,8 @@ import ReviewerOverview from "./pages/ReviewerOverview";
 import SubmissionQueue from "./pages/SubmissionQueue";
 import SubmissionDetail from "./pages/SubmissionDetail";
 import CertificationQueue from "./pages/CertificationQueue";
+import Brands from "./pages/Brands";
+import Partners from "./pages/Partners";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -79,6 +81,8 @@ export default function App() {
         <Route path="/internal/submissions" element={<SubmissionQueue />} />
         <Route path="/internal/submissions/:id" element={<SubmissionDetail />} />
         <Route path="/internal/certifications" element={<CertificationQueue />} />
+        <Route path="/internal/brands" element={<Brands />} />
+        <Route path="/internal/partners" element={<Partners />} />
         <Route path="/resources/:slug" element={<Article />} />
         <Route path="/verify/:credentialId" element={<VerifyCertificate />} />
       </Routes>
