@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import heroPhones from "../assets/hero-phones.png";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
@@ -25,8 +26,12 @@ export default function RestaurantHero() {
               </p>
             </div>
             <div className="flex flex-wrap gap-4 items-center w-full">
-              <Button>View the course</Button>
-              <Button variant="outline">See the owner dashboard</Button>
+              <Link to="/course">
+                <Button>View the course</Button>
+              </Link>
+              <Link to="/dashboard">
+                <Button variant="outline">See the owner dashboard</Button>
+              </Link>
             </div>
           </div>
           <div className="flex flex-wrap gap-4 items-center w-full">

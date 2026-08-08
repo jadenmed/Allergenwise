@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
 import CheckItem from "./ui/CheckItem";
@@ -32,7 +33,9 @@ export default function Audiences() {
                 </CheckItem>
               </div>
             </div>
-            <Button size="sm">Get certified</Button>
+            <Link to="/sign-up">
+              <Button size="sm">Get certified</Button>
+            </Link>
           </div>
 
           <div className="flex-1 min-w-0 flex flex-col gap-8 items-start rounded-2xl border border-grey-300 bg-white p-8">
@@ -53,9 +56,11 @@ export default function Audiences() {
                 </CheckItem>
               </div>
             </div>
-            <Button variant="outline" size="sm">
-              Find restaurants
-            </Button>
+            <Link to="/find-restaurant">
+              <Button variant="outline" size="sm">
+                Find restaurants
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

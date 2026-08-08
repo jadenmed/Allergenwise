@@ -1,0 +1,67 @@
+{
+  "module": {
+    "id": "foundations-of-food-allergens",
+    "order": 1,
+    "title": "Foundations of Food Allergens",
+    "description": "Foundations of food allergens: what a food allergy is, the FDA Top 9 allergens, and allergic reactions and anaphylaxis.",
+    "estimated_minutes": 25,
+    "lessons": [
+      {
+        "id": "d1000000-0000-0000-0000-000000000101",
+        "order": 1,
+        "title": "What Is a Food Allergy?",
+        "body_md": "A food allergy is an immune system reaction to a food protein. Unlike food preferences or intolerances, allergic reactions can become serious and life-threatening.\n\nEven a small amount of an allergen can trigger a reaction in sensitive individuals.\n\nRestaurants must take all allergy disclosures seriously.\n\nThis training is designed to help restaurants reduce allergen risk through education, communication, and structured procedures.\n\nNo restaurant can guarantee a completely allergen-free environment. The goal of this program is to improve awareness, reduce preventable mistakes, and support safer food handling practices.\n\n## Key Concepts\n\n- Food allergies involve the immune system\n- Small amounts of allergens can trigger reactions\n- Allergic reactions can become severe quickly\n- Restaurants should focus on risk reduction, not guarantees\n- Honest communication is critical",
+        "video_url": "mux://placeholder-foundations-of-food-allergens-1",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "What is a food allergy?",
+          "options": [
+            { "text": "A food preference", "correct": false },
+            { "text": "A diet choice", "correct": false },
+            { "text": "An immune system reaction to a food protein", "correct": true },
+            { "text": "A mild intolerance", "correct": false }
+          ],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000102",
+        "order": 2,
+        "title": "Understanding the Top 9 Food Allergens",
+        "body_md": "The FDA identifies 9 major food allergens responsible for the majority of serious allergic reactions in the United States.\n\nEvery restaurant staff member should be familiar with these allergens.\n\n1. **Milk (Dairy)** — Milk is found in cheese, butter, cream sauces, soups, dressings, and many prepared foods.\n\n   Common restaurant examples include:\n   - Alfredo sauce\n   - Ranch dressing\n   - Mashed potatoes\n   - Cream soups\n   - Cheese blends\n2. **Eggs** — Eggs are commonly used in baking, sauces, breading, desserts, and pasta.\n\n   Common restaurant examples include:\n   - Mayonnaise\n   - Aioli\n   - Pancake batter\n   - Fried food breading\n   - Desserts\n3. **Peanuts** — Peanuts are a separate allergen from tree nuts and may appear in oils, sauces, desserts, and Asian dishes.\n\n   Common restaurant examples include:\n   - Peanut oil\n   - Peanut sauces\n   - Dessert toppings\n   - Asian marinades\n4. **Tree Nuts** — Tree nuts include almonds, walnuts, cashews, pecans, pistachios, and more.\n\n   Common restaurant examples include:\n   - Pesto\n   - Nut garnishes\n   - Desserts\n   - Nut oils\n5. **Soy** — Soy is commonly found in sauces, marinades, dressings, and processed foods.\n\n   Common restaurant examples include:\n   - Soy sauce\n   - Teriyaki sauce\n   - Marinades\n   - Dressings\n6. **Wheat** — Wheat is a grain found in bread, pasta, breading, flour, and many sauces.\n\n   Common restaurant examples include:\n   - Bread\n   - Pasta\n   - Roux\n   - Fried food breading\n   - Soy sauce\n7. **Fish** — Fish includes finned fish such as salmon, tuna, cod, and others.\n\n   Common restaurant examples include:\n   - Fish sauce\n   - Caesar dressing\n   - Seafood dishes\n   - Stocks\n8. **Shellfish** — Shellfish includes shrimp, crab, lobster, clams, scallops, and oysters.\n\n   Common restaurant examples include:\n   - Shrimp dishes\n   - Oyster sauce\n   - Seafood stock\n   - Crab mixtures\n9. **Sesame** — Sesame is increasingly common in restaurant foods.\n\n   Common restaurant examples include:\n   - Tahini\n   - Sesame oil\n   - Burger buns\n   - Dressings\n   - Asian sauces\n\n> **Important:**\n> Allergens may not always be visible or obvious.\n>\n> Staff should never guess whether a dish is safe.\n>\n> Ingredients must always be verified.",
+        "video_url": "mux://placeholder-foundations-of-food-allergens-2",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "Which of the following is one of the Top 9 allergens?",
+          "options": [
+            { "text": "Chicken", "correct": false },
+            { "text": "Beef", "correct": false },
+            { "text": "Peanuts", "correct": true },
+            { "text": "Rice", "correct": false }
+          ],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000103",
+        "order": 3,
+        "title": "Understanding Allergic Reactions and Anaphylaxis",
+        "body_md": "Allergic reactions can range from mild symptoms to severe, life-threatening emergencies.\n\nA severe allergic reaction is called anaphylaxis.\n\nAnaphylaxis can happen quickly and requires immediate action.\n\nCommon symptoms may include:\n\n- Hives or rash\n- Swelling of the lips, face, or throat\n- Difficulty breathing\n- Wheezing\n- Vomiting\n- Dizziness or fainting\n- Tightness in the chest\n\nRestaurants should always take allergic reactions seriously.\n\nIf a severe reaction is suspected:\n\n- Alert a manager immediately\n- Call 911\n- Stay with the guest\n- Never assume symptoms will improve on their own\n\n## Key Concepts\n\n- Allergic reactions can escalate quickly\n- Immediate action matters\n- Staff should never ignore symptoms\n- Emergency response awareness is critical",
+        "video_url": "mux://placeholder-foundations-of-food-allergens-3",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "What is the term for a severe allergic reaction?",
+          "options": [
+            { "text": "Contamination", "correct": false },
+            { "text": "Cross-contact", "correct": false },
+            { "text": "Anaphylaxis", "correct": true },
+            { "text": "Intolerance", "correct": false }
+          ],
+          "explanation": ""
+        }
+      }
+    ]
+  },
+  "_exam_questions_note": "exam_questions intentionally empty — source file does not provide Final Certification Test questions.",
+  "exam_questions": []
+}

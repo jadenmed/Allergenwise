@@ -1,0 +1,85 @@
+{
+  "module": {
+    "id": "front-of-house-communication",
+    "order": 3,
+    "title": "Front of House Communication and Guest Interaction",
+    "description": "Front of house communication: identifying and responding to allergy disclosures, order communication and the AllergenWise workflow, managing guest expectations, and recognizing allergic reactions.",
+    "estimated_minutes": 25,
+    "lessons": [
+      {
+        "id": "d1000000-0000-0000-0000-000000000301",
+        "order": 1,
+        "title": "Identifying and Responding to Allergy Disclosures",
+        "body_md": "Front of house staff are often the first line of communication when a guest reports a food allergy.\n\nAll allergy disclosures must be taken seriously.\n\nStaff should:\n\n- Listen carefully to the guest\n- Identify the specific allergen\n- Clarify any uncertainty respectfully\n- Notify the kitchen clearly\n- Escalate to management when needed\n\n> **Important:**\n> Staff should never dismiss or minimize a guest’s allergy.\n\nExamples of appropriate responses:\n\n- “Thank you for letting me know.”\n- “I’ll communicate this with the kitchen immediately.”\n- “Let me confirm the ingredients and preparation process for you.”\n\nExamples to avoid:\n\n- “You’ll probably be okay.”\n- “We’ve never had a problem before.”\n- “Just pick it off.”\n\n## Key Concepts\n\n- Allergy disclosures require immediate attention\n- Clear communication reduces risk\n- Guests should be treated respectfully and seriously\n- Escalation is appropriate when uncertain",
+        "video_url": "mux://placeholder-front-of-house-communication-1",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "What should staff do when a guest reports a food allergy?",
+          "options": [
+            { "text": "Ignore the concern", "correct": false },
+            { "text": "Assume it is minor", "correct": false },
+            { "text": "Take the allergy seriously and communicate it clearly", "correct": true },
+            { "text": "Continue service without changes", "correct": false }
+          ],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000302",
+        "order": 2,
+        "title": "Order Communication and Allergy Workflow",
+        "body_md": "Allergy orders should follow a clear communication workflow to reduce mistakes and improve consistency.\n\nThe AllergenWise Risk Reduction Workflow:\n\n1. Guest informs staff\n2. Front of house confirms the allergen\n3. Allergy alert is entered clearly into the POS/KDS system\n4. Kitchen is notified of the allergy\n5. Ingredients and preparation methods are verified\n6. Safe handling procedures are followed\n7. Manager verification occurs when needed\n8. Final confirmation is completed before service\n9. Honest communication is maintained with the guest\n\n> **Important:**\n> Staff should never assume the kitchen saw the allergy note.\n\nDuring busy shifts, verbal communication may also be necessary.\n\nExamples of effective communication:\n\n- Clearly labeling “SESAME ALLERGY” in the system\n- Verbally notifying the kitchen when necessary\n- Confirming modifications before serving\n\n## Key Concepts\n\n- Structured workflows reduce mistakes\n- Clear allergy alerts are critical\n- Communication between FOH and BOH matters\n- Verification should happen at every stage",
+        "video_url": "mux://placeholder-front-of-house-communication-2",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "What is the purpose of the AllergenWise Risk Reduction Workflow?",
+          "options": [
+            { "text": "Increase menu options", "correct": false },
+            { "text": "Speed up service", "correct": false },
+            { "text": "Reduce allergen risk through structured communication and procedures", "correct": true },
+            { "text": "Reduce staffing needs", "correct": false }
+          ],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000303",
+        "order": 3,
+        "title": "Managing Guest Expectations",
+        "body_md": "Restaurants should communicate honestly and responsibly with guests regarding food allergies.\n\nNo restaurant can guarantee a completely allergen-free environment.\n\nStaff should avoid making guarantees about safety.\n\nAppropriate language includes:\n\n- “We take allergies seriously and will take precautions.”\n- “Let me confirm the preparation process for you.”\n- “We cannot guarantee a completely allergen-free environment.”\n\nAvoid statements such as:\n\n- “You’ll be fine.”\n- “There is no risk.”\n- “We guarantee it’s safe.”\n\nIf a dish cannot be safely prepared:\n\n- Inform the guest honestly\n- Escalate to management\n- Offer alternatives when appropriate\n\n> **Important:**\n> Being honest about limitations helps reduce risk and supports responsible communication.\n\n## Key Concepts\n\n- Restaurants should avoid guarantees\n- Honest communication is important\n- Safety should come before service speed\n- Guests deserve clear information",
+        "video_url": "mux://placeholder-front-of-house-communication-3",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "Can a restaurant guarantee a completely allergen-free environment?",
+          "options": [
+            { "text": "Yes", "correct": false },
+            { "text": "Only with trained staff", "correct": false },
+            { "text": "No, restaurants cannot guarantee a completely allergen-free environment", "correct": true },
+            { "text": "Only during slow hours", "correct": false }
+          ],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000304",
+        "order": 4,
+        "title": "Recognizing and Responding to Allergic Reactions",
+        "body_md": "Even when proper procedures are followed, allergic reactions may still occur.\n\nStaff should recognize the signs of a possible allergic reaction and respond immediately.\n\nCommon symptoms include:\n\n- Hives or rash\n- Swelling of the lips, face, or throat\n- Difficulty breathing\n- Wheezing\n- Vomiting\n- Dizziness or fainting\n- Tightness in the chest\n\nA severe allergic reaction is called anaphylaxis and can become life-threatening quickly.\n\nIf a severe reaction is suspected:\n\n1. Alert a manager immediately\n2. Call 911\n3. Stay with the guest\n4. Monitor the guest’s condition\n5. Assist with an EpiPen if requested\n\n> **Important:**\n> - Never wait to see if symptoms improve\n> - Never leave the guest alone\n> - All reactions should be taken seriously\n\n## Key Concepts\n\n- Allergic reactions can escalate quickly\n- Immediate action matters\n- Staff should remain calm and responsive\n- Emergency awareness is critical",
+        "video_url": "mux://placeholder-front-of-house-communication-4",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "Which of the following may be a sign of a severe allergic reaction?",
+          "options": [
+            { "text": "Mild hunger", "correct": false },
+            { "text": "Fatigue", "correct": false },
+            { "text": "Difficulty breathing or throat swelling", "correct": true },
+            { "text": "Tiredness", "correct": false }
+          ],
+          "explanation": ""
+        }
+      }
+    ]
+  },
+  "_exam_questions_note": "exam_questions intentionally empty — source file does not provide Final Certification Test questions.",
+  "exam_questions": []
+}

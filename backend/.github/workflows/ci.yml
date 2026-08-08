@@ -1,0 +1,182 @@
+name: CI
+
+on:
+  push:
+    branches: [main, integration/**]
+  pull_request:
+    branches: [main, integration/**]
+
+# Two jobs, deliberately parallel. Wall-clock is the slower of the two rather
+# than the sum, and a formatting failure never looks like a test failure.
+jobs:
+  static:
+    name: typecheck + format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm typecheck
+
+      # Scoped to .ts/.tsx/.css by .prettierignore. Fails the build on any
+      # file that does not match .prettierrc. Runs after typecheck so a broken
+      # build reports the type error first, rather than burying it under a
+      # formatting failure.
+      - run: pnpm format:check
+
+  test:
+    name: vitest against a real local Supabase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # A bare Postgres service container is NOT sufficient. The integration
+      # suites build Supabase clients against the API gateway on 127.0.0.1:54321
+      # (PostgREST + GoTrue), not raw Postgres on 54322, and several create real
+      # auth.users rows. That needs the whole local stack.
+      #
+      # No env and no secrets are configured here on purpose: supabase/config.toml
+      # pins the same ports .env.test does, .env.test is committed, and
+      # vitest.config.ts loads it with override:true — so the suite points at the
+      # local stack without anything being injected. .env.local is never read by
+      # CI and must never be: it points at the hosted project.
+      # PINNED, NOT `latest`. `latest` installed CLI 2.111.0, which stops
+      # honouring the legacy anon/service_role demo JWTs that the committed
+      # .env.test supplies — every real-DB suite then failed with "permission
+      # denied for table certificates", because PostgREST resolved those
+      # requests to a role with no table privileges. The grants were fine; the
+      # keys were not being accepted. 2.95.4 is what developers run locally, so
+      # CI and a developer's machine now provision the same stack. An unpinned
+      # toolchain silently changes what CI means from one day to the next.
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.95.4
+
+      # Applies supabase/migrations ([db.migrations] enabled in config.toml).
+      - run: supabase start
+
+      - run: supabase status
+
+      # No env is set for this step, deliberately. CI briefly supplied a
+      # CRON_SECRET placeholder because purge-stale-pending-certs-cron sent a
+      # bearer token it never set on the route's side — it passed locally only
+      # because .env.local happened to have one. That suite now self-provisions
+      # the literal itself, the way expire-certs-cron always did, so nothing
+      # here has to compensate for it. If a test needs a value, the test says
+      # so; the pipeline does not quietly hand it one.
+      - name: vitest
+        run: pnpm vitest run --reporter=default --reporter=json --outputFile=vitest-report.json
+
+      # WHY THIS STEP EXISTS
+      #
+      # A non-zero exit is not the only way this job can be wrong. vitest can
+      # exit 0 having run almost nothing — a bad path filter, a config change, a
+      # collection error that drops whole files — and a green check that tested
+      # nothing is worse than no check at all, because it reads as coverage.
+      #
+      # So the numbers are asserted, not just the exit code.
+      #
+      # These numbers are the post-merge baseline (lane-b with main merged in:
+      # T-49 and T-45a). They were 1257/105 while this task was being written,
+      # against lane-b alone — merging main added 99 tests and 9 files, and a
+      # stale floor would have permitted all 99 to vanish silently, which is the
+      # exact hole this step exists to plug. Re-measure after any merge.
+      #
+      # MIN_PASSED is the fragile one, and that is deliberate. Anyone who adds a
+      # suite raises it; anyone who removes tests has to LOWER it, which means
+      # doing so on purpose and saying why in the commit message. Bumping this
+      # number without explaining what changed is the one thing this step exists
+      # to prevent. It is a floor, not an equality, so adding tests never breaks
+      # CI on its own.
+      #
+      # MAX_SKIPPED is 8, and those 8 are legitimate: seven live-migration tests
+      # in subscriptions-invoice-unique.test.ts that require TEST_DATABASE_URL,
+      # and one @upstash/ratelimit live smoke. They skip on absent config by
+      # design. CI does not provision either and must not fail because of them —
+      # but a NINTH skip means something that used to run has stopped, which is
+      # exactly the T-25 failure mode, so the ceiling is hard.
+      #
+      # T-51 INTERACTION — READ THIS BEFORE LOWERING ANYTHING.
+      #
+      # T-51 is open: under parallel load one test times out at random, a
+      # different file each run, and every one of them passes in isolation. With
+      # `failed === 0` asserted here, that flake will turn this job red at
+      # random until T-51 is fixed.
+      #
+      # The correct response to a red run is to check whether it is the flake —
+      # re-run the job, and see whether the same test fails twice. It is NOT to
+      # relax this assertion or to raise a timeout to make the symptom go away.
+      # A pipeline that tolerates a flake is a pipeline nobody reads, which is
+      # the same reason Playwright is excluded below.
+      - name: assert the suite actually ran
+        if: always()
+        run: |
+          node -e '
+            const fs = require("node:fs");
+            const REPORT = "vitest-report.json";
+
+            const MIN_PASSED = 1356;
+            const MAX_SKIPPED = 8;
+            const MIN_FILES = 114;
+
+            if (!fs.existsSync(REPORT)) {
+              console.error("FAIL: " + REPORT + " was never written — vitest did not get far enough to report. Read the vitest step above.");
+              process.exit(1);
+            }
+
+            const r = JSON.parse(fs.readFileSync(REPORT, "utf8"));
+            const passed = r.numPassedTests;
+            const failed = r.numFailedTests;
+            const skipped = r.numPendingTests;
+            const files = Array.isArray(r.testResults) ? r.testResults.length : 0;
+
+            console.log("passed=" + passed + " failed=" + failed + " skipped=" + skipped + " files=" + files);
+
+            const problems = [];
+            if (failed !== 0) problems.push(failed + " test(s) failed");
+            if (passed < MIN_PASSED) problems.push("only " + passed + " tests passed, floor is " + MIN_PASSED + " — coverage went DOWN. If that was intentional, lower MIN_PASSED in this workflow and say why in the commit message.");
+            if (skipped > MAX_SKIPPED) problems.push(skipped + " tests skipped, ceiling is " + MAX_SKIPPED + " — a suite that used to run is now skipping. The database is probably not reachable.");
+            if (files < MIN_FILES) problems.push("only " + files + " test files ran, floor is " + MIN_FILES + " — files were dropped from collection.");
+
+            if (problems.length) {
+              console.error("FAIL:\n  - " + problems.join("\n  - "));
+              process.exit(1);
+            }
+            console.log("OK: the suite ran and cleared every floor.");
+          '
+
+# PLAYWRIGHT IS EXCLUDED ON PURPOSE — A DECISION, NOT AN OVERSIGHT.
+#
+# The e2e suite currently has 16 failing tests and 32 that never run:
+# full-pilot-loop.spec.ts dies at step 3 and takes steps 4-13 with it. All of it
+# is pre-existing and traced to missing Upstash configuration and unseeded
+# content — none of it to the app being broken.
+#
+# Wiring that in now would make CI red on every commit, and a CI that is always
+# red teaches people to ignore CI, which costs more than having none. Playwright
+# joins this workflow in T-19b, once those failures are fixed.
+#
+# So: this workflow proves the code compiles, is formatted, and passes the full
+# unit + integration suite against a real database. It does NOT prove that any
+# browser-level flow works.

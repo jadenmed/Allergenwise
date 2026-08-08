@@ -1,0 +1,11 @@
+{
+  "crons": [
+    { "path": "/api/cron/expire-listings",            "schedule": "0 3 * * *"  },
+    { "path": "/api/cron/expire-certs",                "schedule": "15 3 * * *" },
+    { "path": "/api/cron/expire-subscriptions",        "schedule": "30 3 * * *" },
+    { "path": "/api/cron/purge-stale-pending-certs",   "schedule": "45 3 * * *" },
+    { "path": "/api/cron/digest-reviewer-queue",       "schedule": "0 9 * * *"  },
+    { "path": "/api/cron/weekly-admin-digest",         "schedule": "0 8 * * 1"  },
+    { "path": "/api/cron/exam-timeout-sweep",          "schedule": "* * * * *"  }
+  ]
+}

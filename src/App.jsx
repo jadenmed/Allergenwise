@@ -24,6 +24,7 @@ import CertificationRecord from "./pages/CertificationRecord";
 import Billing from "./pages/Billing";
 import StaffPortal from "./pages/StaffPortal";
 import StaffCourse from "./pages/StaffCourse";
+import PortalCourseLesson from "./pages/PortalCourseLesson";
 import Article from "./pages/Article";
 import VerifyCertificate from "./pages/VerifyCertificate";
 import ReviewerOverview from "./pages/ReviewerOverview";
@@ -92,6 +93,7 @@ export default function App() {
         <Route path="/dashboard/billing" element={<Billing />} />
         <Route path="/portal" element={<StaffPortal />} />
         <Route path="/portal/course" element={<StaffCourse />} />
+        <Route path="/portal/course/lesson/:lessonId" element={<PortalCourseLesson />} />
         <Route path="/internal" element={<ReviewerOverview />} />
         <Route path="/internal/submissions" element={<SubmissionQueue />} />
         <Route path="/internal/submissions/:id" element={<SubmissionDetail />} />

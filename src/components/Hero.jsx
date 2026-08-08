@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import heroPhones from "../assets/hero-phones.png";
 import sealCheck from "../assets/seal-check.svg";
 import magnifyingGlass from "../assets/magnifying-glass.svg";
@@ -6,6 +7,8 @@ import Button from "./ui/Button";
 import CheckItem from "./ui/CheckItem";
 
 export default function Hero() {
+  const navigate = useNavigate();
+
   return (
     <section className="w-full flex flex-col items-center bg-grey-100 px-4 sm:px-6 lg:px-12 pt-10 sm:pt-14 lg:pt-20 pb-12 lg:pb-20">
       <div className="w-full max-w-[1200px] flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-12">
@@ -27,8 +30,10 @@ export default function Hero() {
               </p>
             </div>
             <div className="flex flex-wrap gap-4 items-center w-full">
-              <Button icon={sealCheck}>Certify your restaurant</Button>
-              <Button icon={magnifyingGlass} variant="outline">
+              <Button icon={sealCheck} onClick={() => navigate("/sign-up")}>
+                Certify your restaurant
+              </Button>
+              <Button icon={magnifyingGlass} variant="outline" onClick={() => navigate("/find-restaurant")}>
                 Find &amp; verify a restaurant
               </Button>
             </div>

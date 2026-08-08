@@ -57,7 +57,9 @@ export default function CourseHero() {
             <Link to="/course/lesson/1/1">
               <Button>View the course</Button>
             </Link>
-            <Button variant="outline">See the owner dashboard</Button>
+            <Link to="/dashboard">
+              <Button variant="outline">See the owner dashboard</Button>
+            </Link>
           </div>
         </div>
 

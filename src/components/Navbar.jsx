@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import Button from "./ui/Button";
 
@@ -13,6 +13,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <header className="w-full sticky top-0 z-50 flex flex-col items-center backdrop-blur-[3px] bg-white/88 border-b border-grey-300 anim-slide-down">
@@ -42,10 +43,10 @@ export default function Navbar() {
             </nav>
           </div>
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={() => navigate("/verify")}>
               Verify a certificate
             </Button>
-            <Button variant="primary" size="sm">
+            <Button variant="primary" size="sm" onClick={() => navigate("/sign-up")}>
               Get certified
             </Button>
           </div>
@@ -89,10 +90,26 @@ export default function Navbar() {
               ))}
             </nav>
             <div className="flex flex-col gap-3 pt-3">
-              <Button variant="outline" size="sm" className="w-full justify-center">
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full justify-center"
+                onClick={() => {
+                  setMenuOpen(false);
+                  navigate("/verify");
+                }}
+              >
                 Verify a certificate
               </Button>
-              <Button variant="primary" size="sm" className="w-full justify-center">
+              <Button
+                variant="primary"
+                size="sm"
+                className="w-full justify-center"
+                onClick={() => {
+                  setMenuOpen(false);
+                  navigate("/sign-up");
+                }}
+              >
                 Get certified
               </Button>
             </div>

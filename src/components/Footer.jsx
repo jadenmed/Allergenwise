@@ -15,7 +15,7 @@ const RESTAURANT_LINKS = [
 const COURSE_LINKS = [
   { label: "Course", to: "/course" },
   { label: "Find restaurant", to: "/find-restaurant" },
-  { label: "Get certified", to: "#" },
+  { label: "Get certified", to: "/sign-up" },
 ];
 const SOCIALS = [
   { icon: instagram, label: "Instagram" },
@@ -36,7 +36,9 @@ export default function Footer() {
                   Accredited allergen-safety certification for restaurants and
                   instant public verification for diners.
                 </p>
-                <Button size="sm">Get certified</Button>
+                <Link to="/sign-up">
+                  <Button size="sm">Get certified</Button>
+                </Link>
               </div>
             </div>
             <div className="flex gap-3 items-start">

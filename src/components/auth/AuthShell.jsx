@@ -5,15 +5,17 @@ import Button from "../ui/Button";
 
 export function AuthHeader({ label, to }) {
   return (
-    <header className="w-full flex items-center justify-between gap-4 border-b border-grey-300 bg-white px-4 sm:px-6 py-4">
-      <Link to="/">
-        <Logo />
-      </Link>
-      <Link to={to}>
-        <Button variant="outline" size="sm">
-          {label}
-        </Button>
-      </Link>
+    <header className="w-full flex flex-col items-center border-b border-grey-300 bg-white px-4 sm:px-6 lg:px-12">
+      <div className="w-full max-w-[1200px] flex items-center justify-between gap-4 py-4">
+        <Link to="/">
+          <Logo />
+        </Link>
+        <Link to={to}>
+          <Button variant="outline" size="sm">
+            {label}
+          </Button>
+        </Link>
+      </div>
     </header>
   );
 }

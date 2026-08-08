@@ -1,21 +1,16 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../Logo";
+import { getLearnerProfile, logout } from "../../lib/api";
 
-export const STAFF_MEMBER = {
-  name: "Daniel Kim",
-  initials: "DK",
-  role: "Head Chef",
-  restaurant: "The Garden Table",
-};
-
-export const WORK_RESTAURANT = {
-  initials: "GT",
-  name: "The Garden Table",
-  address: "412 Mill St \u00b7 Portland, OR",
-  status: "active",
-  staffCertifiedCount: 9,
-  staffTotalCount: 9,
-};
+function initialsOf(name) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+}
 
 const NAV_ITEMS = [
   { key: "profile", label: "My profile", icon: "person", to: "/portal" },
@@ -54,6 +49,35 @@ function SignOutIcon({ className = "" }) {
 const NAV_ICONS = { person: PersonIcon, doc: DocIcon };
 
 export default function PortalShell({ activeNav = "profile", children }) {
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
+  const [signingOut, setSigningOut] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    getLearnerProfile()
+      .then((res) => {
+        if (!cancelled) setProfile(res);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const fullName = profile?.fullName ?? "";
+  const initials = fullName ? initialsOf(fullName) : "";
+
+  const handleSignOut = async () => {
+    setSigningOut(true);
+    try {
+      await logout();
+    } catch {
+      // Fall through — clear the client side regardless of a network error.
+    }
+    navigate("/sign-in", { replace: true });
+  };
+
   return (
     <div className="w-full min-h-screen flex flex-col bg-grey-100">
       <header className="w-full flex items-center justify-between gap-4 border-b border-grey-300 bg-white px-4 sm:px-6 py-4">
@@ -66,28 +90,30 @@ export default function PortalShell({ activeNav = "profile", children }) {
         </div>
         <div className="flex items-center gap-2.5 shrink-0">
           <div className="flex items-center justify-center size-9 rounded-full bg-teal-100 text-xs font-bold text-teal-700">
-            {STAFF_MEMBER.initials}
+            {initials}
           </div>
-          <p className="text-base text-teal-950">{STAFF_MEMBER.name}</p>
+          <p className="text-base text-teal-950">{fullName}</p>
         </div>
       </header>
 
       <div className="w-full flex flex-1">
         <aside className="hidden lg:flex w-[280px] shrink-0 flex-col justify-between border-r border-grey-300 bg-white px-4 py-6">
           <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-2 rounded-xl bg-teal-050 p-4">
-              <p className="text-xs font-bold uppercase tracking-wide text-grey-500">
-                I work at
-              </p>
-              <p className="text-lg font-semibold text-teal-950">
-                {STAFF_MEMBER.restaurant}
-              </p>
-              <p className="flex items-center gap-1.5 text-sm font-semibold text-green-700">
-                <span className="size-1.5 rounded-full bg-green-700" />
-                Active &middot; {WORK_RESTAURANT.staffCertifiedCount}/
-                {WORK_RESTAURANT.staffTotalCount} certified
-              </p>
-            </div>
+            {profile?.restaurant && (
+              <div className="flex flex-col gap-2 rounded-xl bg-teal-050 p-4">
+                <p className="text-xs font-bold uppercase tracking-wide text-grey-500">
+                  I work at
+                </p>
+                <p className="text-lg font-semibold text-teal-950">
+                  {profile.restaurant.name}
+                </p>
+                <p className="flex items-center gap-1.5 text-sm font-semibold text-green-700">
+                  <span className="size-1.5 rounded-full bg-green-700" />
+                  Active &middot; {profile.staffCounts.certified}/
+                  {profile.staffCounts.total} certified
+                </p>
+              </div>
+            )}
 
             <nav className="flex flex-col gap-1">
               {NAV_ITEMS.map((item) => {
@@ -121,22 +147,26 @@ export default function PortalShell({ activeNav = "profile", children }) {
             <div className="border-t border-grey-300 pt-4">
               <button
                 type="button"
-                className="flex items-center gap-2 text-base font-semibold text-red-600 cursor-pointer"
+                onClick={handleSignOut}
+                disabled={signingOut}
+                className="flex items-center gap-2 text-base font-semibold text-red-600 disabled:opacity-60 cursor-pointer"
               >
                 <SignOutIcon className="size-5" />
-                Sign out
+                {signingOut ? "Signing out..." : "Sign out"}
               </button>
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center justify-center size-9 rounded-full bg-teal-100 text-xs font-bold text-teal-700 shrink-0">
-                {STAFF_MEMBER.initials}
+                {initials}
               </div>
               <div className="flex flex-col">
                 <p className="text-sm font-semibold text-teal-950">
-                  {STAFF_MEMBER.name}
+                  {fullName}
                 </p>
                 <p className="text-xs text-grey-500">
-                  {STAFF_MEMBER.role} &middot; {STAFF_MEMBER.restaurant}
+                  {profile?.jobRole}
+                  {profile?.jobRole && profile?.restaurant ? " \u00b7 " : ""}
+                  {profile?.restaurant?.name}
                 </p>
               </div>
             </div>

@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import sealCheck from "../assets/seal-check.svg";
 import magnifyingGlass from "../assets/magnifying-glass.svg";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
 
 export default function Cta() {
+  const navigate = useNavigate();
+
   return (
     <section className="w-full flex flex-col items-center justify-center bg-gradient-to-b from-teal-050 to-grey-100 px-4 sm:px-6 lg:px-12 py-16 lg:py-24">
       <div className="w-full max-w-[1200px] flex flex-col items-center gap-10">
@@ -20,8 +23,10 @@ export default function Cta() {
           </div>
         </div>
         <div className="flex flex-wrap gap-4 items-center justify-center w-full">
-          <Button icon={sealCheck}>Certify your restaurant</Button>
-          <Button icon={magnifyingGlass} variant="outline">
+          <Button icon={sealCheck} onClick={() => navigate("/sign-up")}>
+            Certify your restaurant
+          </Button>
+          <Button icon={magnifyingGlass} variant="outline" onClick={() => navigate("/verify")}>
             Verify a certificate
           </Button>
         </div>

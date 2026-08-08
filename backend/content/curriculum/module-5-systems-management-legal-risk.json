@@ -1,0 +1,92 @@
+{
+  "module": {
+    "id": "systems-management-legal-risk",
+    "order": 5,
+    "title": "Systems, Management, and Legal Risk Reduction",
+    "description": "Systems, management, and legal risk reduction: the AllergenWise Risk Reduction Workflow, manager decision making, labeling systems, legal protection, high-risk situations, and daily practices.",
+    "estimated_minutes": 35,
+    "_content_note": "Source provides OUTLINE ONLY for Lessons 5.1–5.6 (no body prose, no quiz questions). body_md and quick_check are the missing-content marker; nothing is invented.",
+    "lessons": [
+      {
+        "id": "d1000000-0000-0000-0000-000000000501",
+        "order": 1,
+        "title": "The AllergenWise Risk Reduction Workflow",
+        "body_md": "<!-- CONTENT MISSING — not provided in source file -->",
+        "video_url": "mux://placeholder-systems-management-legal-risk-1",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "<!-- CONTENT MISSING — not provided in source file -->",
+          "options": [],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000502",
+        "order": 2,
+        "title": "Manager Decision Making and Escalation",
+        "body_md": "<!-- CONTENT MISSING — not provided in source file -->",
+        "video_url": "mux://placeholder-systems-management-legal-risk-2",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "<!-- CONTENT MISSING — not provided in source file -->",
+          "options": [],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000503",
+        "order": 3,
+        "title": "Menu, Labeling, and Allergen Awareness Systems",
+        "body_md": "<!-- CONTENT MISSING — not provided in source file -->",
+        "video_url": "mux://placeholder-systems-management-legal-risk-3",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "<!-- CONTENT MISSING — not provided in source file -->",
+          "options": [],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000504",
+        "order": 4,
+        "title": "Legal Protection and Risk Awareness",
+        "body_md": "<!-- CONTENT MISSING — not provided in source file -->",
+        "video_url": "mux://placeholder-systems-management-legal-risk-4",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "<!-- CONTENT MISSING — not provided in source file -->",
+          "options": [],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000505",
+        "order": 5,
+        "title": "High-Risk Situations and Special Considerations",
+        "body_md": "<!-- CONTENT MISSING — not provided in source file -->",
+        "video_url": "mux://placeholder-systems-management-legal-risk-5",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "<!-- CONTENT MISSING — not provided in source file -->",
+          "options": [],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000506",
+        "order": 6,
+        "title": "Daily Allergen Safety Practices",
+        "body_md": "<!-- CONTENT MISSING — not provided in source file -->",
+        "video_url": "mux://placeholder-systems-management-legal-risk-6",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "<!-- CONTENT MISSING — not provided in source file -->",
+          "options": [],
+          "explanation": ""
+        }
+      }
+    ]
+  },
+  "_exam_questions_note": "exam_questions intentionally empty — source file does not provide Final Certification Test questions.",
+  "exam_questions": []
+}

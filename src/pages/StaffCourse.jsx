@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
 import PortalShell from "../components/portal/PortalShell";
+import { getLearnerHome, ApiError } from "../lib/api";
 
 function SpinnerIcon({ className = "" }) {
   return (
@@ -18,19 +21,77 @@ function ShieldCheckIcon({ className = "" }) {
   );
 }
 
-function DocIcon({ className = "" }) {
+function LockIcon({ className = "" }) {
   return (
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M5.5 2.5h6l3 3v12h-9z" />
-      <path d="M11 2.5v3.5h3.5" />
-      <path d="M7.5 11h5M7.5 13.5h5" />
+      <rect x="4.5" y="9" width="11" height="8" rx="1.5" />
+      <path d="M6.5 9V6.5a3.5 3.5 0 0 1 7 0V9" />
     </svg>
   );
 }
 
 const primaryDark = "bg-teal-900 hover:bg-teal-950";
 
+function firstIncompleteLesson(module) {
+  return module.lessons.find((l) => l.status !== "complete") ?? module.lessons[0];
+}
+
 export default function StaffCourse() {
+  const navigate = useNavigate();
+  const [data, setData] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    getLearnerHome()
+      .then((res) => {
+        if (!cancelled) setData(res);
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          setError(
+            err instanceof ApiError ? err.message : "Failed to load your course."
+          );
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (loading) {
+    return (
+      <PortalShell activeNav="course">
+        <p className="text-base text-grey-600">Loading your course&hellip;</p>
+      </PortalShell>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <PortalShell activeNav="course">
+        <p className="rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+          {error || "Something went wrong."}
+        </p>
+      </PortalShell>
+    );
+  }
+
+  const { modules, certificate } = data;
+  const currentModule = modules.find((m) => m.status === "in_progress");
+  const upNextModule =
+    !currentModule ? modules.find((m) => m.status === "not_started") : null;
+  const activeModule = currentModule || upNextModule;
+  const completedModules = modules.filter((m) => m.status === "complete");
+  const lockedModules = modules.filter((m) => m.status === "locked");
+
+  const resumeLesson = activeModule ? firstIncompleteLesson(activeModule) : null;
+  const goToLesson = (lessonId) => navigate(`/portal/course/lesson/${lessonId}`);
+
   return (
     <PortalShell activeNav="course">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -44,130 +105,182 @@ export default function StaffCourse() {
             credential.
           </p>
         </div>
-        <Button variant="primary" size="sm" className={primaryDark}>
-          Continue
-        </Button>
-      </div>
-
-      <div className="flex flex-col gap-3">
-        <p className="text-xs font-bold uppercase tracking-wide text-teal-950">
-          In progress &middot; 1
-        </p>
-
-        <div className="rounded-2xl border border-grey-300 bg-white p-6 sm:p-8 flex flex-col gap-6">
-          <div className="flex items-start gap-4">
-            <div className="flex items-center justify-center size-11 rounded-lg bg-teal-050 text-teal-700 shrink-0">
-              <SpinnerIcon className="size-5" />
-            </div>
-            <div className="flex flex-col gap-1">
-              <p className="text-lg font-semibold text-teal-950">
-                Allergen Safety Recertification
-              </p>
-              <p className="text-base text-grey-600">
-                The big 9, labeling law, and where each hides on a menu
-                &middot; 6 lessons
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <p className="flex items-center gap-2 text-base text-grey-600">
-              <span className="font-semibold text-teal-950">52% complete</span>
-              <span className="text-grey-400">&middot;</span>
-              Module 3 of 5
-              <span className="text-grey-400">&middot;</span>
-              ~1.4 hrs left
-            </p>
-            <div className="h-2 w-full rounded-full bg-grey-300 overflow-hidden">
-              <div className="h-full rounded-full bg-teal-700" style={{ width: "52%" }} />
-            </div>
-          </div>
-
-          <Button variant="primary" size="sm" className={`w-fit ${primaryDark}`}>
-            Continue from Lesson 3.2 &rarr;
+        {resumeLesson && (
+          <Button
+            variant="primary"
+            size="sm"
+            className={primaryDark}
+            onClick={() => goToLesson(resumeLesson.id)}
+          >
+            Continue
           </Button>
-        </div>
+        )}
       </div>
+
+      {activeModule && (
+        <div className="flex flex-col gap-3">
+          <p className="text-xs font-bold uppercase tracking-wide text-teal-950">
+            {currentModule ? "In progress" : "Up next"} &middot; 1
+          </p>
+
+          <div className="rounded-2xl border border-grey-300 bg-white p-6 sm:p-8 flex flex-col gap-6">
+            <div className="flex items-start gap-4">
+              <div className="flex items-center justify-center size-11 rounded-lg bg-teal-050 text-teal-700 shrink-0">
+                <SpinnerIcon className="size-5" />
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="text-lg font-semibold text-teal-950">
+                  {activeModule.title}
+                </p>
+                <p className="text-base text-grey-600">
+                  {activeModule.totalCount} lesson
+                  {activeModule.totalCount === 1 ? "" : "s"}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <p className="flex items-center gap-2 text-base text-grey-600">
+                <span className="font-semibold text-teal-950">
+                  {Math.round(
+                    (activeModule.completedCount / activeModule.totalCount) * 100
+                  )}
+                  % complete
+                </span>
+                <span className="text-grey-400">&middot;</span>
+                Module {activeModule.orderIndex} of {modules.length}
+              </p>
+              <div className="h-2 w-full rounded-full bg-grey-300 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-teal-700"
+                  style={{
+                    width: `${
+                      (activeModule.completedCount / activeModule.totalCount) * 100
+                    }%`,
+                  }}
+                />
+              </div>
+            </div>
+
+            {resumeLesson && (
+              <Button
+                variant="primary"
+                size="sm"
+                className={`w-fit ${primaryDark}`}
+                onClick={() => goToLesson(resumeLesson.id)}
+              >
+                {currentModule ? "Continue from" : "Start"} Lesson{" "}
+                {activeModule.orderIndex}.{resumeLesson.orderIndex} &rarr;
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-col gap-3">
         <p className="text-xs font-bold uppercase tracking-wide text-teal-950">
-          Completed &middot; 1
+          Completed &middot; {completedModules.length}
         </p>
 
-        <div className="rounded-2xl border border-grey-300 bg-white p-6 sm:p-8 flex flex-col gap-6">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex items-start gap-4">
+        {certificate && (
+          <div className="rounded-2xl border border-grey-300 bg-white p-6 sm:p-8 flex flex-col gap-6">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start gap-4">
+                <div className="flex items-center justify-center size-11 rounded-lg bg-teal-050 text-teal-700 shrink-0">
+                  <ShieldCheckIcon className="size-5" />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p className="text-lg font-semibold text-teal-950">
+                    Allergen Safety Certification
+                  </p>
+                  <p className="text-base text-grey-600">
+                    {certificate.certCode}
+                  </p>
+                </div>
+              </div>
+              <span className="inline-flex shrink-0 rounded px-3.5 py-2 text-xs font-bold uppercase tracking-wide bg-green-100 text-green-700">
+                Active
+              </span>
+            </div>
+
+            <p className="flex items-center gap-2 text-base text-grey-600">
+              Issued {new Date(certificate.issuedAt).toLocaleDateString()}
+              <span className="text-grey-400">&middot;</span>
+              Expires {new Date(certificate.expiresAt).toLocaleDateString()}
+            </p>
+
+            {certificate.pdfUrl && (
+              <div className="flex items-center gap-3">
+                <a href={certificate.pdfUrl} target="_blank" rel="noreferrer">
+                  <Button variant="outline" size="sm">
+                    Download certificate
+                  </Button>
+                </a>
+              </div>
+            )}
+          </div>
+        )}
+
+        {completedModules.map((mod) => (
+          <div
+            key={mod.id}
+            className="rounded-2xl border border-grey-300 bg-white p-6 sm:p-8 flex items-center justify-between gap-4"
+          >
+            <div className="flex items-center gap-4">
               <div className="flex items-center justify-center size-11 rounded-lg bg-teal-050 text-teal-700 shrink-0">
                 <ShieldCheckIcon className="size-5" />
               </div>
               <div className="flex flex-col gap-1">
                 <p className="text-lg font-semibold text-teal-950">
-                  Allergen Safety Certification
+                  {mod.title}
                 </p>
                 <p className="text-base text-grey-600">
-                  Original certification &middot; 5 modules &middot;
-                  25-question exam
+                  {mod.totalCount} lessons
                 </p>
               </div>
             </div>
             <span className="inline-flex shrink-0 rounded px-3.5 py-2 text-xs font-bold uppercase tracking-wide bg-green-100 text-green-700">
-              Passed
+              Completed
             </span>
           </div>
+        ))}
 
-          <p className="flex items-center gap-2 text-base text-grey-600">
-            Original certification
-            <span className="text-grey-400">&middot;</span>
-            Completed Jun 22, 2025
-            <span className="text-grey-400">&middot;</span>
-            AW-PDX-8FQ2-K9-02
+        {!certificate && completedModules.length === 0 && (
+          <p className="text-base text-grey-500">
+            Nothing completed yet &mdash; keep going!
           </p>
-
-          <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm">
-              View result
-            </Button>
-            <Button variant="outline" size="sm">
-              Download certificate
-            </Button>
-          </div>
-        </div>
+        )}
       </div>
 
-      <div className="flex flex-col gap-3">
-        <p className="text-xs font-bold uppercase tracking-wide text-teal-950">
-          Available &middot; Optional
-        </p>
-
-        <div className="rounded-2xl border border-grey-300 bg-white p-6 sm:p-8 flex flex-col gap-6">
-          <div className="flex items-start gap-4">
-            <div className="flex items-center justify-center size-11 rounded-lg bg-grey-100 text-grey-500 shrink-0">
-              <DocIcon className="size-5" />
-            </div>
-            <div className="flex flex-col gap-1">
-              <p className="text-lg font-semibold text-teal-950">
-                Allergen Leadership for Managers
-              </p>
-              <p className="text-base text-grey-600">
-                Advanced module for FOH / BOH leads. Cross-contact auditing,
-                supplier interrogation, allergic-incident drills.
-              </p>
-            </div>
-          </div>
-
-          <p className="flex items-center gap-2 text-base text-grey-600">
-            3 modules
-            <span className="text-grey-400">&middot;</span>
-            ~2 hrs
-            <span className="text-grey-400">&middot;</span>
-            Recommended for: Head Chef, Sous Chef, Manager
+      {lockedModules.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <p className="text-xs font-bold uppercase tracking-wide text-teal-950">
+            Locked &middot; {lockedModules.length}
           </p>
 
-          <Button variant="outline" size="sm" className="w-fit">
-            Enroll
-          </Button>
+          <div className="rounded-2xl border border-grey-300 bg-white divide-y divide-grey-300">
+            {lockedModules.map((mod) => (
+              <div
+                key={mod.id}
+                className="flex items-center gap-4 p-6 sm:p-8"
+              >
+                <div className="flex items-center justify-center size-11 rounded-lg bg-grey-100 text-grey-500 shrink-0">
+                  <LockIcon className="size-5" />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p className="text-lg font-semibold text-teal-950">
+                    {mod.title}
+                  </p>
+                  <p className="text-base text-grey-500">
+                    {mod.totalCount} lessons &middot; Locked until the
+                    previous module is complete
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </PortalShell>
   );
 }

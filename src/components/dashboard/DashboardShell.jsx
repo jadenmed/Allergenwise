@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../Logo";
+import { logout } from "../../lib/api";
 
 export const RESTAURANT = {
   name: "The Garden Table",
@@ -65,6 +67,19 @@ function SignOutIcon({ className = "" }) {
 const NAV_ICONS = { grid: GridIcon, people: PeopleIcon, card: CardIcon };
 
 export default function DashboardShell({ activeNav = "overview", children }) {
+  const navigate = useNavigate();
+  const [signingOut, setSigningOut] = useState(false);
+
+  const handleSignOut = async () => {
+    setSigningOut(true);
+    try {
+      await logout();
+    } catch {
+      // Fall through — clear the client side regardless of a network error.
+    }
+    navigate("/sign-in", { replace: true });
+  };
+
   return (
     <div className="w-full min-h-screen flex flex-col bg-grey-100">
       <header className="w-full flex items-center justify-between gap-4 border-b border-grey-300 bg-white px-4 sm:px-6 py-4">
@@ -132,10 +147,12 @@ export default function DashboardShell({ activeNav = "overview", children }) {
             <div className="border-t border-grey-300 pt-4">
               <button
                 type="button"
-                className="flex items-center gap-2 text-base font-semibold text-red-600 cursor-pointer"
+                onClick={handleSignOut}
+                disabled={signingOut}
+                className="flex items-center gap-2 text-base font-semibold text-red-600 disabled:opacity-60 cursor-pointer"
               >
                 <SignOutIcon className="size-5" />
-                Sign out
+                {signingOut ? "Signing out..." : "Sign out"}
               </button>
             </div>
             <div className="flex items-center gap-3">

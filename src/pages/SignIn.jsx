@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
 import AuthShell from "../components/auth/AuthShell";
+import { login, homeRouteForRole, ApiError } from "../lib/api";
 
 function LockIcon({ className = "" }) {
   return (
@@ -78,6 +79,29 @@ const FEATURES = [
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      const { role } = await login(email, password);
+      navigate(homeRouteForRole(role));
+    } catch (err) {
+      setError(
+        err instanceof ApiError
+          ? err.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <AuthShell
@@ -97,13 +121,22 @@ export default function SignIn() {
         </p>
       </div>
 
-      <form className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        {error && (
+          <p className="rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+            {error}
+          </p>
+        )}
+
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-semibold text-teal-950">
             Email
           </label>
           <input
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
             placeholder="you@restaurant.com"
             className="w-full rounded-lg border border-grey-300 bg-white px-4 py-3 text-base text-teal-950 placeholder-grey-400 focus:outline-none focus:border-teal-700"
           />
@@ -121,6 +154,9 @@ export default function SignIn() {
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
               placeholder="Enter your password"
               className="w-full rounded-lg border border-grey-300 bg-white px-4 py-3 pr-11 text-base text-teal-950 placeholder-grey-400 focus:outline-none focus:border-teal-700"
             />
@@ -142,9 +178,10 @@ export default function SignIn() {
           type="submit"
           variant="primary"
           size="lg"
-          className="w-full bg-teal-900 hover:bg-teal-950"
+          disabled={loading}
+          className="w-full bg-teal-900 hover:bg-teal-950 disabled:opacity-60"
         >
-          Sign in
+          {loading ? "Signing in..." : "Sign in"}
         </Button>
       </form>
 

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import benefitsPhones from "../assets/benefits-phones.png";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
@@ -19,7 +20,9 @@ export default function PeaceOfMind() {
               less of a leap of faith.
             </p>
           </div>
-          <Button variant="outlineOnDark">Try the verification screen</Button>
+          <Link to="/verify">
+            <Button variant="outlineOnDark">Try the verification screen</Button>
+          </Link>
         </div>
         <div className="shrink-0 w-full max-w-[420px] lg:max-w-[460px] aspect-[420/360] anim-fade-right">
           <img

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import heroPhones from "../assets/hero-phones.png";
 import magnifyingGlass from "../assets/magnifying-glass.svg";
 import Badge from "./ui/Badge";
@@ -13,6 +14,8 @@ const FILTERS = [
 ];
 
 export default function DinerHero() {
+  const navigate = useNavigate();
+
   return (
     <section className="w-full flex flex-col items-center bg-grey-100 px-4 sm:px-6 lg:px-12 pt-10 sm:pt-14 lg:pt-20 pb-12 lg:pb-20">
       <div className="w-full max-w-[1200px] flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-12">
@@ -41,7 +44,9 @@ export default function DinerHero() {
                   className="flex-1 min-w-0 text-base text-teal-950 placeholder:text-grey-500 outline-none"
                 />
               </div>
-              <Button size="sm">Search</Button>
+              <Button size="sm" onClick={() => navigate("/find-restaurant")}>
+                Search
+              </Button>
             </div>
             <div className="flex flex-wrap gap-3 items-center w-full">
               {FILTERS.map((filter, i) => (

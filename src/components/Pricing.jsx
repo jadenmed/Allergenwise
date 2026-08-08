@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
 import CheckItem from "./ui/CheckItem";
@@ -91,12 +92,14 @@ export default function Pricing() {
                   <CheckItem key={check}>{check}</CheckItem>
                 ))}
               </div>
-              <Button
-                variant={highlighted ? "primary" : "outline"}
-                className="w-full justify-center mt-auto"
-              >
-                Start with one
-              </Button>
+              <Link to="/sign-up" className="w-full mt-auto">
+                <Button
+                  variant={highlighted ? "primary" : "outline"}
+                  className="w-full justify-center"
+                >
+                  Start with one
+                </Button>
+              </Link>
             </div>
           ))}
         </div>

@@ -39,9 +39,11 @@ function AuthedHeader() {
             </nav>
           </div>
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant="outline" size="sm">
-              Verify a certificate
-            </Button>
+            <Link to="/verify">
+              <Button variant="outline" size="sm">
+                Verify a certificate
+              </Button>
+            </Link>
             <div className="flex items-center gap-2 pr-1">
               <div className="flex items-center justify-center size-8 rounded-full bg-teal-100 text-sm font-semibold text-teal-700">
                 DK
@@ -114,9 +116,11 @@ export default function Forbidden() {
                 Back to my profile
               </Button>
             </Link>
-            <Button variant="outline" size="lg">
-              Contact support
-            </Button>
+            <a href="mailto:support@allergenwise.com">
+              <Button variant="outline" size="lg">
+                Contact support
+              </Button>
+            </a>
           </div>
 
           <p className="text-sm text-grey-500 max-w-[480px]">

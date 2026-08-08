@@ -1,0 +1,67 @@
+{
+  "module": {
+    "id": "back-of-house-procedures",
+    "order": 4,
+    "title": "Back of House Procedures and Execution",
+    "description": "Back of house procedures: ingredient verification and hidden risks, safe kitchen execution, and final verification before service.",
+    "estimated_minutes": 20,
+    "lessons": [
+      {
+        "id": "d1000000-0000-0000-0000-000000000401",
+        "order": 1,
+        "title": "Ingredient Verification and Hidden Risks",
+        "body_md": "Before preparing an allergy-sensitive meal, ingredients must always be verified.\n\nStaff should never assume a dish is safe based on appearance or past experience.\n\nHidden allergens may exist in:\n\n- Sauces\n- Marinades\n- Dressings\n- Spice blends\n- Packaged ingredients\n- Fryer coatings\n- Prepared foods\n\nStaff should:\n\n- Check ingredient labels when available\n- Confirm ingredients with management when uncertain\n- Review sauces and pre-made items carefully\n- Stop and verify if unsure\n\n> **Important:**\n> Never guess whether an ingredient contains an allergen.\n>\n> If ingredients cannot be verified, the safest decision may be to avoid serving the dish.",
+        "video_url": "mux://placeholder-back-of-house-procedures-1",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "Why should ingredients always be verified before preparing an allergy-sensitive meal?",
+          "options": [
+            { "text": "To improve presentation", "correct": false },
+            { "text": "To reduce food cost", "correct": false },
+            { "text": "Hidden allergens may exist in sauces, marinades, and prepared foods", "correct": true },
+            { "text": "To speed up service", "correct": false }
+          ],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000402",
+        "order": 2,
+        "title": "Safe Kitchen Execution Procedures",
+        "body_md": "Allergy-sensitive meals should follow structured kitchen procedures designed to reduce cross-contact risk.\n\nBefore preparation begins:\n\n- Identify the allergy clearly\n- Prepare a clean workspace\n- Use clean utensils and tools\n- Separate allergen-containing foods when possible\n\nDuring preparation:\n\n- Keep allergy orders separate from other dishes\n- Avoid unnecessary exposure to allergens\n- Use clean gloves and wash hands appropriately\n- Maintain awareness throughout preparation\n\nHigh-risk situations include:\n\n- Shared fryers\n- Shared grills\n- Shared prep surfaces\n- Shared utensils\n\n> **Important:**\n> Even small mistakes during preparation can create allergen risk.",
+        "video_url": "mux://placeholder-back-of-house-procedures-2",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "What should staff do before preparing an allergy-sensitive meal?",
+          "options": [
+            { "text": "Begin cooking immediately", "correct": false },
+            { "text": "Reuse dirty utensils", "correct": false },
+            { "text": "Prepare a clean workspace and identify the allergy clearly", "correct": true },
+            { "text": "Ignore nearby foods", "correct": false }
+          ],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000403",
+        "order": 3,
+        "title": "Final Verification Before Service",
+        "body_md": "Before an allergy-sensitive dish is served, a final verification step should be completed.\n\nStaff should confirm:\n\n- The correct ingredients were used\n- Modifications were completed properly\n- No allergen-containing garnish or ingredient was added\n- The dish matches the allergy request\n\nStaff should also:\n\n- Visually inspect the plate\n- Confirm the correct guest will receive the dish\n- Communicate clearly with front of house staff when needed\n\n> **Important:**\n> The final verification step should never be rushed.\n>\n> A mistake at the final stage can still expose a guest to allergens.",
+        "video_url": "mux://placeholder-back-of-house-procedures-3",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "What is the purpose of final verification before service?",
+          "options": [
+            { "text": "Improve food presentation", "correct": false },
+            { "text": "Speed up service", "correct": false },
+            { "text": "Confirm the dish was prepared safely and correctly", "correct": true },
+            { "text": "Reduce food cost", "correct": false }
+          ],
+          "explanation": ""
+        }
+      }
+    ]
+  },
+  "_exam_questions_note": "exam_questions intentionally empty — source file does not provide Final Certification Test questions.",
+  "exam_questions": []
+}

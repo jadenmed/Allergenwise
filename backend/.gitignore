@@ -1,0 +1,64 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Testing
+/coverage
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build
+
+# Misc
+.DS_Store
+*.pem
+Thumbs.db
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Supabase
+/supabase/.branches
+/supabase/.temp
+
+# Graphify code-graph output — generated, never commit (mirrors 2933b3b on wave-6)
+graphify-out/
+app/graphify-out/
+.graphify*
+
+# Claude Code local settings
+.claude/
+
+# Scratch/staging area for files pending deletion
+_to_delete/
+
+# Written by the CI vitest step (--reporter=json --outputFile) and by anyone
+# who runs that command locally. Never a committed artefact.
+vitest-report.json

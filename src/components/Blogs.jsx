@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import blog1 from "../assets/blog-1.jpg";
 import blog2 from "../assets/blog-2.jpg";
 import blog3 from "../assets/blog-3.jpg";
@@ -105,7 +106,9 @@ export default function Blogs() {
           ))}
         </div>
 
-        <Button variant="outline">Read all articles</Button>
+        <Link to="/resources">
+          <Button variant="outline">Read all articles</Button>
+        </Link>
       </div>
     </section>
   );

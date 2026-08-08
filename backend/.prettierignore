@@ -1,0 +1,55 @@
+# Prettier is scoped to source: .ts, .tsx, .css
+#
+# .prettierrc has existed for a long time with nothing able to enforce it.
+# This file defines the scope that `pnpm format` and `pnpm format:check`
+# operate on. Everything prettier would otherwise reformat is listed below,
+# with the reason it is out of scope.
+
+# --- Generated / vendored output -------------------------------------------
+node_modules/
+.next/
+out/
+build/
+coverage/
+playwright-report/
+test-results/
+next-env.d.ts
+
+# Graphify code-graph output. Generated, gitignored, never hand-edited.
+graphify-out/
+app/graphify-out/
+
+# Scratch staging area for files pending deletion.
+_to_delete/
+
+# --- Data and history, not code --------------------------------------------
+# db/ is migrations + seeds, all .sql. Migrations are append-only history:
+# reformatting one rewrites a file whose whole value is that it never changes.
+db/
+supabase/
+
+# Owned by the package manager. Reformatting it desyncs the install.
+pnpm-lock.yaml
+
+# --- Deliberately deferred to a separate decision ---------------------------
+# Markdown (66 files, incl. CLAUDE.md, CONTEXT.md, audits/, docs/). Prose
+# wrapping is a different argument from code style; settle it on its own.
+*.md
+*.mdx
+
+# YAML. Includes .github/workflows/ci.yml, which is where format:check runs.
+# Reformatting the workflow in the same change that adds the check to it is
+# how a green pipeline turns red for a reason nobody can find.
+*.yml
+*.yaml
+
+# JSON. Config files plus content/curriculum/*.json, which are authored data.
+*.json
+*.jsonc
+*.json5
+
+# Plain-JS config and the standalone HTML wireframe.
+*.js
+*.cjs
+*.mjs
+*.html

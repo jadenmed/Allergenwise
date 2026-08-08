@@ -1,0 +1,85 @@
+{
+  "module": {
+    "id": "cross-contact-and-safe-handling",
+    "order": 2,
+    "title": "Cross-Contact and Safe Handling Procedures",
+    "description": "Cross-contact and safe handling: understanding cross-contact, cleaning and kitchen safety, handwashing and gloves, and preventing cross-contact during preparation.",
+    "estimated_minutes": 30,
+    "lessons": [
+      {
+        "id": "d1000000-0000-0000-0000-000000000201",
+        "order": 1,
+        "title": "Understanding Cross-Contact",
+        "body_md": "Cross-contact occurs when allergen proteins are transferred from one food, surface, utensil, or piece of equipment to another.\n\nEven very small amounts of an allergen can trigger a serious allergic reaction.\n\nCross-contact is different from bacterial contamination.\n\nExamples of cross-contact include:\n\n- Using the same cutting board for multiple foods without proper cleaning\n- Shared fryer oil\n- Shared grill surfaces\n- Reusing utensils between dishes\n- Touching allergen-containing food and then touching another dish\n\n> **Important:**\n> Cooking does NOT remove allergens.\n>\n> A dish may appear safe while still containing allergen proteins.\n\n## Key Concepts\n\n- Cross-contact can happen easily in busy kitchens\n- Small amounts of allergens can cause reactions\n- Shared equipment increases risk\n- Awareness and proper procedures reduce risk",
+        "video_url": "mux://placeholder-cross-contact-and-safe-handling-1",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "What is cross-contact?",
+          "options": [
+            { "text": "Food spoilage", "correct": false },
+            { "text": "Bacteria growth", "correct": false },
+            { "text": "Transfer of allergen proteins from one food or surface to another", "correct": true },
+            { "text": "Overcooking food", "correct": false }
+          ],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000202",
+        "order": 2,
+        "title": "Cleaning and Kitchen Safety Procedures",
+        "body_md": "Proper cleaning procedures are essential for reducing allergen risk.\n\nSimply wiping a surface is not enough to remove allergen proteins.\n\nStaff should:\n\n- Clean and sanitize prep surfaces thoroughly\n- Use clean utensils and tools\n- Separate allergen-containing foods when possible\n- Maintain organized prep areas\n\nHigh-risk equipment includes:\n\n- Shared fryers\n- Shared grills\n- Flat tops\n- Shared prep surfaces\n- Shared pasta water\n\n> **Important:**\n> Shared fryer oil can transfer allergen proteins between foods.\n\nFor example:\nFrench fries cooked in oil previously used for breaded shrimp may no longer be safe for some guests with shellfish allergies.\n\n## Key Concepts\n\n- Cleaning reduces allergen risk\n- Wiping alone is not enough\n- Shared equipment increases risk\n- Organized prep procedures improve safety",
+        "video_url": "mux://placeholder-cross-contact-and-safe-handling-2",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "Why is wiping a surface not enough?",
+          "options": [
+            { "text": "It changes food taste", "correct": false },
+            { "text": "It takes too long", "correct": false },
+            { "text": "Wiping may not remove allergen proteins", "correct": true },
+            { "text": "It only affects appearance", "correct": false }
+          ],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000203",
+        "order": 3,
+        "title": "Handwashing, Gloves, and Safe Handling Procedures",
+        "body_md": "Gloves alone do NOT prevent allergen cross-contact.\n\nHands must be properly washed before changing gloves and before handling allergy-sensitive food.\n\nProper procedures include:\n\n- Washing hands thoroughly with soap and water\n- Changing gloves between tasks\n- Washing hands after touching allergen-containing food\n- Avoiding contact with multiple surfaces unnecessarily\n- Using clean utensils and prep areas\n\n> **Important:**\n> Wiping gloves or continuing to use the same gloves does NOT make them safe.\n>\n> Gloves can spread allergens just like hands.\n\n## Key Concepts\n\n- Gloves are not a replacement for handwashing\n- Proper handwashing reduces allergen transfer\n- Gloves must be changed appropriately\n- Safe handling procedures reduce risk",
+        "video_url": "mux://placeholder-cross-contact-and-safe-handling-3",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "Do gloves alone prevent allergen cross-contact?",
+          "options": [
+            { "text": "Yes", "correct": false },
+            { "text": "Sometimes", "correct": false },
+            { "text": "No, gloves alone do not prevent cross-contact", "correct": true },
+            { "text": "Only during prep", "correct": false }
+          ],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000204",
+        "order": 4,
+        "title": "Preventing Cross-Contact During Preparation",
+        "body_md": "Allergy-sensitive meals should be prepared carefully using structured procedures.\n\nStaff should:\n\n- Use clean prep surfaces\n- Use clean or separate utensils\n- Verify ingredients before use\n- Keep allergy orders separate from other foods\n- Avoid placing allergy-safe dishes near allergen-containing foods\n\nWhenever possible:\n\n- Use dedicated prep areas\n- Use separate equipment\n- Minimize unnecessary exposure to allergens\n\n> **Important:**\n> Never guess whether a dish is safe.\n\nIf there is uncertainty:\n\n- Stop the process\n- Ask a manager\n- Verify ingredients and procedures\n\n## Key Concepts\n\n- Organized preparation reduces risk\n- Separation is important\n- Ingredient verification is critical\n- Uncertainty should always be escalated",
+        "video_url": "mux://placeholder-cross-contact-and-safe-handling-4",
+        "duration_sec": 180,
+        "quick_check": {
+          "question": "What should staff do before preparing an allergy-sensitive meal?",
+          "options": [
+            { "text": "Begin cooking immediately", "correct": false },
+            { "text": "Ignore nearby foods", "correct": false },
+            { "text": "Use clean prep surfaces and verify ingredients", "correct": true },
+            { "text": "Reuse utensils", "correct": false }
+          ],
+          "explanation": ""
+        }
+      }
+    ]
+  },
+  "_exam_questions_note": "exam_questions intentionally empty — source file does not provide Final Certification Test questions.",
+  "exam_questions": []
+}

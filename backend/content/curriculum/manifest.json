@@ -1,0 +1,33 @@
+{
+  "_disclaimer": "Transcribed verbatim from content/curriculum/source/AllergenWise_Curriculum_Source.pdf. Lessons 1.1–4.3 are full content; Lessons 5.1–5.6 are outline-only in the source and carry the missing-content marker; the Final Certification Test pool is not in the source (no exam-eligible questions seeded).",
+  "_version": "1.0",
+  "_generated_at": "2026-05-28T00:00:00Z",
+  "_layout": "Module content is split across 5 files in this directory (one per section). Structure follows the AllergenWise Curriculum Source. body_md is verbatim source content (1.1–4.3) or the missing-content marker (5.1–5.6). quick_check holds each lesson's first Checkpoint Quiz question; the full multi-question quizzes live in the shared question bank (questions + question_choices; db/seed-curriculum.sql + migration 0018_shared_question_bank). Use lib/curriculum.ts loadCurriculum() to assemble the unified shape.",
+  "modules": [
+    {
+      "id": "foundations-of-food-allergens",
+      "order": 1,
+      "file": "module-1-foundations-of-food-allergens.json"
+    },
+    {
+      "id": "cross-contact-and-safe-handling",
+      "order": 2,
+      "file": "module-2-cross-contact-and-safe-handling.json"
+    },
+    {
+      "id": "front-of-house-communication",
+      "order": 3,
+      "file": "module-3-front-of-house-communication.json"
+    },
+    {
+      "id": "back-of-house-procedures",
+      "order": 4,
+      "file": "module-4-back-of-house-procedures.json"
+    },
+    {
+      "id": "systems-management-legal-risk",
+      "order": 5,
+      "file": "module-5-systems-management-legal-risk.json"
+    }
+  ]
+}
